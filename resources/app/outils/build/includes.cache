@@ -1,0 +1,17 @@
+[
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "C:\\Users\\philippe\\OneDrive - ac-rouen.fr\\_blockly@rduino\\appli\\files\\resources\\app\\outils\\arduino\\avr\\cores\\arduino"
+  },
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "C:\\Users\\philippe\\OneDrive - ac-rouen.fr\\_blockly@rduino\\appli\\files\\resources\\app\\outils\\arduino\\avr\\variants\\leonardo"
+  },
+  {
+    "Sourcefile": "C:\\Users\\philippe\\OneDrive - ac-rouen.fr\\_blockly@rduino\\appli\\files\\resources\\app\\outils\\build\\sketch\\sketch.ino.cpp",
+    "Include": "",
+    "Includepath": ""
+  }
+]
