@@ -56,7 +56,7 @@ window.addEventListener('load', function load(event) {
 			if (err) return console.log(err)
 		});
 		document.getElementById('local_debug').style.color = '#ffffff'
-		document.getElementById('local_debug').textContent = 'vérification : en cours...'
+		document.getElementById('local_debug').textContent += '\nVérification : en cours...'
 		exec(cmd , {cwd: './resources/compilation'} , (err, stdout, stderr) => {
 			if (stderr) {
 				document.getElementById('local_debug').style.color = '#ff0000'
@@ -67,7 +67,7 @@ window.addEventListener('load', function load(event) {
 				return
 			}
 			document.getElementById('local_debug').style.color = '#00ff00'
-			document.getElementById('local_debug').innerHTML = 'vérification : OK'
+			document.getElementById('local_debug').innerHTML = 'Vérification : OK'
 			fs.unlink(file, function(err){
 				if(err) return console.log(err)
 			}) 
