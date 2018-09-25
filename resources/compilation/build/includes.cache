@@ -1,0 +1,17 @@
+[
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "F:\\Logiciels\\Arduino_graphique\\BlocklyArduino_electrified\\resources\\compilation\\arduino\\avr\\cores\\arduino"
+  },
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "F:\\Logiciels\\Arduino_graphique\\BlocklyArduino_electrified\\resources\\compilation\\arduino\\avr\\variants\\standard"
+  },
+  {
+    "Sourcefile": "F:\\Logiciels\\Arduino_graphique\\BlocklyArduino_electrified\\resources\\compilation\\build\\sketch\\sketch.ino.cpp",
+    "Include": "",
+    "Includepath": ""
+  }
+]
