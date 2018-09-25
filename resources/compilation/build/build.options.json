@@ -1,0 +1,10 @@
+{
+  "builtInLibrariesFolders": "F:\\Logiciels\\Arduino_graphique\\BlocklyArduino_electrified\\resources\\compilation\\libraries",
+  "customBuildProperties": "",
+  "fqbn": "arduino:avr:uno",
+  "hardwareFolders": "F:\\Logiciels\\Arduino_graphique\\BlocklyArduino_electrified\\resources\\compilation",
+  "otherLibrariesFolders": "",
+  "runtime.ide.version": "10600",
+  "sketchLocation": "F:\\Logiciels\\Arduino_graphique\\BlocklyArduino_electrified\\resources\\compilation\\ino\\sketch.ino",
+  "toolsFolders": "F:\\Logiciels\\Arduino_graphique\\BlocklyArduino_electrified\\resources\\compilation\\tools-builder,F:\\Logiciels\\Arduino_graphique\\BlocklyArduino_electrified\\resources\\compilation\\tools\\avr"
+}
