@@ -241,7 +241,6 @@ BlocklyDuino.setArduinoCard =  function () {
 		$("#btn_config_kit").removeClass('hidden');
 		$('#btn_config_kit').attr("href", profile[$("#board_select").val()]['help_link']);
 	}
-
 	BlocklyDuino.cardPicture_change_AIO();
 };
 
@@ -276,9 +275,10 @@ BlocklyDuino.bindFunctions = function() {
 		$('#tab_arduino').remove();
 		$('#pre_arduino').css({'height' : '95%'});
 		} else {
+			$('#btn_pasteIDEArduino').remove();
 			// $('#btn_verify_local').on("click", BlocklyDuino.verify_local_Click);
 			// $('#btn_flash_local').on("click", BlocklyDuino.uploadClick);
-			$('#btn_pasteIDEArduino').on("click", BlocklyDuino.ArduinoIDEClick);
+			// $('#btn_pasteIDEArduino').on("click", BlocklyDuino.ArduinoIDEClick);
 			$('#btn_saveArduino').on("click", BlocklyDuino.saveArduinoFile);
 			$('#btn_block_capture').on("click", BlocklyDuino.workspace_capture);
 			$('#btn_saveXML, #menu_12').on("click", BlocklyDuino.saveXmlFile);
@@ -301,27 +301,27 @@ BlocklyDuino.bindFunctions = function() {
 		BlocklyDuino.selectedCard = $(this).val();
 	});
 	$('#btn_edit_code').mouseover(function() {
-		document.getElementById("survol").textContent = "vérifier";
+		document.getElementById("survol").textContent = MSG['span_edit_code'];
 	}).mouseout(function() {
 		document.getElementById("survol").textContent = "";
 	});
 	$('#btn_saveArduino').mouseover(function() {
-		document.getElementById("survol").textContent = "enregistrer en .INO";
+		document.getElementById("survol").textContent = MSG['span_saveIno'];
 	}).mouseout(function() {
 		document.getElementById("survol").textContent = "";
 	});
 	$('#btn_verify_local').mouseover(function() {
-		document.getElementById("survol").textContent = "vérifier";
+		document.getElementById("survol").textContent = MSG['span_verify_local'];
 	}).mouseout(function() {
 		document.getElementById("survol").textContent = "";
 	});
 	$('#btn_flash_local').mouseover(function() {
-		document.getElementById("survol").textContent = "téléverser";
+		document.getElementById("survol").textContent = MSG['span_flash_local'];
 	}).mouseout(function() {
 		document.getElementById("survol").textContent = "";
 	});
 	$('#btn_term').mouseover(function() {
-		document.getElementById("survol").textContent = "moniteur série";
+		document.getElementById("survol").textContent = MSG['span_connect_serial'];
 	}).mouseout(function() {
 		document.getElementById("survol").textContent = "";
 	});

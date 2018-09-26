@@ -81,30 +81,15 @@ window.addEventListener('load', function load(event) {
 			document.getElementById('local_debug').style.color = '#ffffff'
 			document.getElementById('local_debug').textContent = 'Sélectionner un port et une carte !!!'
 			return
-		} else {
-			document.getElementById('local_debug').style.color = '#ffffff'
-			document.getElementById('local_debug').textContent = 'Carte ' + profile.defaultBoard['description'] + ' sur port ' + com
-			var upload_arg = profile.defaultBoard['upload_arg']
 		}
-		if (carte=="arduino_mega"){
-			var speed = '115200'
-			var cpu = 'atmega2560'
-		} else if (carte=="atmegang"){
-			var speed = '19200'
-			var cpu = 'atmega8'
-		} else if (carte=="arduino_yun"||carte=="arduino_leonardo"||carte=="arduino_micro"){
-			var speed = '57600'
-			var cpu = 'atmega32u4'
-		} else if (carte=="pro8"||carte=="pro16"||carte=="nano"){
-			var speed = '57600'
-			var cpu = 'atmega328p'
-		} else {
-			var speed = '115200'
-			var cpu = 'atmega328p'
-		}
+		document.getElementById('local_debug').style.color = '#ffffff'
+		document.getElementById('local_debug').textContent = 'Carte ' + profile.defaultBoard['description'] + ' sur port ' + com
+		var upload_arg = profile.defaultBoard['upload_arg']
+		var speed = profile.defaultBoard['speed']
+		var cpu = profile.defaultBoard['cpu']
 		var cmd = 'flash.bat ' + cpu + ' ' + com + ' ' + speed
 		document.getElementById('local_debug').style.color = '#ffffff'
-		document.getElementById('local_debug').textContent = 'téléversement : en cours...'
+		document.getElementById('local_debug').textContent = 'Téléversement : en cours...'
 		exec(cmd , {cwd: './resources/compilation'} , (err, stdout, stderr) => {
 			if (err) {
 				document.getElementById('local_debug').style.color = '#ff0000'
@@ -115,7 +100,7 @@ window.addEventListener('load', function load(event) {
 				return
 			}
 			document.getElementById('local_debug').style.color = '#00ff00'
-			document.getElementById('local_debug').textContent = 'téléversement : OK'
+			document.getElementById('local_debug').textContent = 'Téléversement : OK'
 			fs.unlink(file, function(err){
 				if(err) return console.log(err)
 			}) 
