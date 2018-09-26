@@ -301,7 +301,6 @@
 					<div id="barre">
 						<button id="btn_edit_code" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
 							<span id="icon_edit_btn" class="glyphicon glyphicon-edit"> </span>
-							<span id="span_edit_code"> </span>
 						</button>
 						<select id="serialport" >
 							<option value="no_com" selected>Choisir le port</option>
@@ -564,7 +563,7 @@
 		    </div>    
 			<div class="modal-body" id="modal-body-config-global">						
 				<div class="arduino_card_mini_picture_div">
-				    <img id="arduino_card_mini_picture" width="150px"/>
+				    <img id="arduino_card_mini_picture"/>
 				</div>
 				<div class="modal-body-config-global_left">					
 	                <span class="fa fa-language"></span>  <label id="span_languageMenu"> </label>  <select id="languageMenu"></select><br/>
@@ -581,8 +580,8 @@
 									<option value="arduino_micro">Arduino/Genuino MICRO</option>
 									<option value="arduino_mini">Arduino/Genuino MINI ATmega328</option>
 									<option value="arduino_nano">Arduino/Genuino NANO ATmega328</option>
-									<option value="arduino_pro8">Arduino/Genuino Pro Mini 3.3V ATmga328</option>
-									<option value="arduino_pro16">Arduino/Genuino Pro Mini 5V ATmga328</option>
+									<option value="arduino_pro8">Arduino/Genuino Pro Mini 3.3V ATmega328</option>
+									<option value="arduino_pro16">Arduino/Genuino Pro Mini 5V ATmega328</option>
 									<option value="arduino_uno">Arduino/Genuino UNO</option>
 									<option value="arduino_yun">Arduino/Genuino YUN</option>
 									<option value="lilypad">LilyPad ATmega328P</option>
@@ -592,7 +591,8 @@
 									<option value="dagu_rs040">Dagu RS040</option>
 								</optgroup>
 								<optgroup label="Makeblok">
-									<option value="makeblock_mcore">mCore/Orion</option>
+									<option value="makeblock_mcore">mCore mBot</option>
+									<option value="makeblock_orion">Me Orion</option>
 								</optgroup>
 								<optgroup label="DFRobot">
 									<option value="dfrobot_romeo">DFRobot RoMeo v2</option>
