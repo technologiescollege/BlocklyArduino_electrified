@@ -370,6 +370,9 @@ html[dir="RTL"] #languageMenu {
 	word-wrap: break-word;
 	white-space: pre-wrap;
 }
+#serial-checboxes {
+    margin-left: 20px;
+}
 html[dir="RTL"] #toggle_code {
     left: 25px;
 }
@@ -443,6 +446,17 @@ html[dir="RTL"] #select_all {
 	overflow: auto;
 	word-break: break-all;
 	word-wrap: break-word;
+}
+
+#fenetre_term{
+	width: 630px;
+	height: 415px;
+	border: 1px solid #ccc;
+	padding:0px 5px 5px 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	border-radius: 5px;
+	overflow: auto;
 }
 
 .blocklyToolboxDiv {
@@ -524,6 +538,14 @@ html[dir="RTL"] .colors_category {
 }
 .margin-top-5 {
 	margin-top: 5px;
+}
+.blocklyScrollbarKnob {
+  fill: #00929F !important;
+  fill-opacity: 0.7 !important;
+}
+.blocklyScrollbarBackground {
+  stroke-width: 0px !important;
+  fill: none !important;
 }
 
 #convertModal .modal-content:hover {
