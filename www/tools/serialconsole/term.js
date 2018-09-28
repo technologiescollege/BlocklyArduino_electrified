@@ -12,10 +12,6 @@ window.addEventListener('load', function load(event) {
 			s_p.write(entree)
 		}
 	}
-	document.getElementById('btn_quit').onclick = function(event) {
-		var window = remote.getCurrentWindow() 
-		window.close()
-	}
 	document.getElementById('btn_connect').onclick = function(event) {
 		var SerialPort = require("serialport")
 		var moniteur = document.getElementById('fenetre_term')

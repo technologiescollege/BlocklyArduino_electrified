@@ -337,6 +337,7 @@ BlocklyDuino.bindFunctions = function() {
 	
 	//menu déroulant
 	$('#toolboxes, #toggle-Functions').on("change", BlocklyDuino.changeToolboxDefinition);
+	// $('#toolboxes').on("change", BlocklyDuino.changeToolboxDefinition);
 	
 	//bouton de niveaux
 	$('#toolbox_algo, #menu_420').on("click", function(e) {
@@ -885,6 +886,9 @@ BlocklyDuino.init = function() {
 	
     // Hook a save function onto unload.
 	window.addEventListener('unload', BlocklyDuino.backupBlocks, false);
+	
+	//global config
+	BlocklyDuino.initBlocSort();
 	
 	/*pour changer couleur texte dans toolbox
     $("div:contains('bitbloq').blocklyTreeRow, div:contains('bitbloq').blocklyTreeRow ~ div").on("click", function() {
