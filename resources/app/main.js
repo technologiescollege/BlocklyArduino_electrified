@@ -10,6 +10,8 @@ let mainWindow
 let termWindow
 
 app.on('window-all-closed', () => {
+	mainWindow.webContents.session.clearStorageData()
+	mainWindow.webContents.clearHistory()
     app.quit()
 })
 
@@ -40,10 +42,10 @@ app.on('activate', function () {
 	
 function createTerm() {
 	termWindow = new BrowserWindow({
-		width:640,
-		height:560,
+		width: 660,
+		height: 600,
 		'parent':mainWindow,
-		resizable:true,
+		resizable:false,
 		movable:true,
 		frame:true,
 		modal:true

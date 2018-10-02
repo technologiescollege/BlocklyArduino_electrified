@@ -272,7 +272,7 @@ function updatePreview() {
       previewWorkspace.dispose();
     }
     var rtl = newDir == 'rtl';
-    previewWorkspace = Blockly.inject('preview',{rtl: rtl,media: '../media/',sounds:false,scrollbars: true});
+    previewWorkspace = Blockly.inject('preview',{rtl: rtl,media: '../../media/',sounds:false,scrollbars: true});
     oldDir = newDir;
   }
   previewWorkspace.clear();
@@ -326,7 +326,7 @@ function init() {
   onresize();
   window.addEventListener('resize', onresize);
   var toolbox = document.getElementById('toolbox_factory');
-  mainWorkspace = Blockly.inject('blockly',{toolbox: toolbox, media: '../media/'});
+  mainWorkspace = Blockly.inject('blockly',{toolbox: toolbox, media: '../../media/'});
   var rootBlock = Blockly.Block.obtain(mainWorkspace, 'factory_base');
   rootBlock.initSvg();
   rootBlock.render();
