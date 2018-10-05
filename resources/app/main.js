@@ -27,7 +27,7 @@ function createWindow () {
 		mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html'))
 	}
 	mainWindow.setMenu(null);
-	mainWindow.webContents.openDevTools();
+	// mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', function () {
 		mainWindow = null
 	})
@@ -70,7 +70,7 @@ function createfactory() {
 		frame:true,
 		modal:true
 		}) 
-	termWindow.loadURL(path.join(__dirname, "../../www/tools/factory/index.html"))
+	termWindow.loadURL(path.join(__dirname, "../../www/tools/factory/block_factory.html"))
 	termWindow.setMenu(null);
 	termWindow.on('closed', function () { 
 		termWindow = null 

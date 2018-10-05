@@ -176,7 +176,7 @@ BlocklyDuino.load = function (event) {
     }
     // Reset value of input after loading because Chrome will not fire
     // a 'change' event if the same file is loaded again.
-    //$('#load').val('');
+    $('#load').val('');
   };
   reader.readAsText(files[0]);
 };
