@@ -28,12 +28,12 @@
 	<script type="text/javascript" src="core_BlocklyArduino/libs/bootstrap-toggle.min.js"></script>
 	<script type="text/javascript" src="core_BlocklyArduino/libs/clipboard.min.js"></script>
 	<script type="text/javascript" src="core_BlocklyArduino/libs/head.load.min.js"></script>
-	<script type="text/javascript" src="core_BlocklyArduino/libs/html2canvas.min.js"></script>
 	<script type="text/javascript" src="core_BlocklyArduino/libs/jscolor.js"></script>
-	<script type="text/javascript" src="core_BlocklyArduino/libs/prettify.min.js"></script>
+	<script type="text/javascript" src="core_BlocklyArduino/libs/prettify.js"></script>
 	<script type="text/javascript" src="core_BlocklyArduino/libs/smoothie.js"></script>
 
 	<!--TechnoZone51-->
+	<script type="text/javascript" src="tools/TZ51/html2canvas.js"></script>
 	<script type="text/javascript" src="tools/TZ51/canvas2image.js"></script>
 	<!--Fin TZ51-->
 
@@ -61,7 +61,7 @@
 <div class="loading"></div>
 <div id="header">
 	<div id="logo_Titre">
-		<a href="./index_electron.html"><img id="clearLink" src="media/logo-mini.png" border="0" height="36px" onclick="" /></a>
+		<a href="./index_light.html"><img id="clearLink" src="media/logo-mini.png" border="0" height="36px" onclick="" /></a>
 	</div>
 	<div id="header_titres">
 		<div id="divTitreMenu" class="hidden">
@@ -299,18 +299,18 @@
 				</div>
 				<div id="content_arduino" class="tab-pane">
 					<div id="barre">
-						<button id="btn_edit_code" class="btn btn-arduino" data-toggle="modal" data-target="#editModal">
+						<button id="btn_edit_code" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
 							<span id="icon_edit_btn" class="glyphicon glyphicon-edit"> </span>
 						</button>
+						<select id="serialport" >
+							<option value="no_com" selected>Choisir le port</option>
+						</select>
 						<button id="btn_saveArduino" class="btn btn-arduino">
 							<span class="fa fa-code fa-1_5x fa-fw"> </span>
 						</button>
 						<button id="btn_verify_local" class="btn btn-arduino">
 							<span class="fa fa-check fa-1_5x fa-fw"> </span>
 						</button>
-						<select id="serialport" >
-							<option value="no_com" selected>Choisir le port</option>
-						</select>
 						<button id="btn_flash_local" class='btn btn-arduino'>
 							<span class="fa fa-arrow-right fa-1_5x fa-fw"> </span>
 						</button>
