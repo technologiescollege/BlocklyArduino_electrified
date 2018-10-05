@@ -7,7 +7,7 @@ var MSG = {
   span_config_kit: "configurer la maquette",
   span_picture: " afficher la carte",
   span_wiring: " plan de câblage",
-  span_supervision: " supervision de la carte",
+  span_supervision: " supervision",
   span_delete: " effacer TOUS les blocs",
   span_saveXML:" enregistrer fichier B@",
   span_fakeload:" ouvrir fichier B@",
