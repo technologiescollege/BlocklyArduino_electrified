@@ -1,2 +1,2 @@
 @echo off
-.\tools\avr\bin\avrdude -p%1 -carduino -P%2 -b%3 -D -Uflash:w:.\build\sketch.ino.hex:i
+.\tools\avr\bin\avrdude -C .\tools\avr\bin\avrdude.conf -p %1 -c %2 -P %3 -b %4 -D -U flash:w:.\build\sketch.ino.hex:i
