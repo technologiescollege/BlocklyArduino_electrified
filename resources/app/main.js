@@ -27,7 +27,7 @@ function createWindow () {
 		mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html'))
 	}
 	mainWindow.setMenu(null);
-	// mainWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', function () {
 		mainWindow = null
 	})
@@ -43,12 +43,12 @@ app.on('activate', function () {
 function createTerm() {
 	termWindow = new BrowserWindow({
 		width: 660,
-		height: 600,
+		height: 660,
 		'parent':mainWindow,
 		resizable:false,
 		movable:true,
 		frame:true,
-		modal:true
+		modal:false
 		}) 
 	termWindow.loadURL(path.join(__dirname, "../../www/tools/serialconsole/term.html"))
 	termWindow.setMenu(null);
@@ -62,8 +62,8 @@ ipcMain.on("prompt", function () {
 
 function createfactory() {
 	termWindow = new BrowserWindow({
-		width:1066,
-		height:700,
+		width:1200,
+		height:800,
 		'parent':mainWindow,
 		resizable:true,
 		movable:true,

@@ -77,6 +77,7 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:leonardo",
+		upload_avrdude_arg: "m2560",
 	},
 	arduino_mega:{
 		description: "Arduino Mega 2560",
@@ -102,6 +103,8 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"], ["19 (Rx1) ; 18 (Tx1)", "19"], ["17 (Rx2) ; 16 (Tx2)", "17"], ["15 (Rx3) ; 14 (Tx3)", "15"]],
 		upload_arg: "arduino:avr:mega:cpu=atmega2560",
+		upload_avrdude_arg: "m2560",
+		upload_avrdude_prog: "stk500v2",
 	},
 	arduino_micro: {
 	    description: "Arduino Micro",
@@ -249,6 +252,7 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:uno",
+		upload_avrdude_arg: "atmega328p",
 	},
 	arduino_yun: {
 	    description: "Arduino Yùn",

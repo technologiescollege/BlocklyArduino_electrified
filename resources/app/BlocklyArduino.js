@@ -32,8 +32,17 @@ window.addEventListener('load', function load(event) {
 	})
 	document.getElementById('btn_term').onclick = function(event) {
 		var com = document.getElementById('serialport').value
-		localStorage.setItem("com",com)
-		ipcRenderer.send("prompt", "")		
+		if (com != "no_com") {
+			localStorage.setItem("com",com)
+			ipcRenderer.send("prompt", "")
+			document.getElementById('local_debug').style.color = '#ffffff'
+			document.getElementById('local_debug').textContent = ''
+			} else {
+				document.getElementById('local_debug').style.color = '#ffffff'
+				document.getElementById('local_debug').textContent = 'Sélectionner un port COM !!!'
+				return
+		}
+				
 	}
 	document.getElementById('btn_factory').onclick = function(event) {
 		ipcRenderer.send("factory", "")		
@@ -50,7 +59,7 @@ window.addEventListener('load', function load(event) {
 			document.getElementById('local_debug').style.color = '#ffffff'
 			document.getElementById('local_debug').textContent = 'Sélectionner une carte !!!'
 			return
-		}		
+		}
 		var cmd = 'verify.bat ' + upload_arg
 		fs.appendFile(file, data, (err) => {
 			if (err) return console.log(err)
@@ -84,10 +93,11 @@ window.addEventListener('load', function load(event) {
 		}
 		document.getElementById('local_debug').style.color = '#ffffff'
 		document.getElementById('local_debug').textContent = 'Carte ' + profile.defaultBoard['description'] + ' sur port ' + com
-		var upload_arg = profile.defaultBoard['upload_arg']
+		var upload_arg = profile.defaultBoard['upload_avrdude_arg']
+		var programer = profile.defaultBoard['upload_avrdude_prog']
 		var speed = profile.defaultBoard['speed']
 		var cpu = profile.defaultBoard['cpu']
-		var cmd = 'flash.bat ' + cpu + ' ' + com + ' ' + speed
+		var cmd = 'flash.bat ' + upload_arg + ' ' + programer + ' ' + com + ' ' + speed
 		document.getElementById('local_debug').style.color = '#ffffff'
 		document.getElementById('local_debug').textContent = 'Téléversement : en cours...'
 		exec(cmd , {cwd: './resources/compilation'} , (err, stdout, stderr) => {
