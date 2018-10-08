@@ -3,7 +3,8 @@ const {ipcMain} = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
-const userDataPath = app.getPath ('userData');
+const userDataPath = app.getPath ('userData')
+
 app.setPath ('userData', app.getAppPath());
 
 let mainWindow
@@ -27,7 +28,7 @@ function createWindow () {
 		mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html'))
 	}
 	mainWindow.setMenu(null);
-	mainWindow.webContents.openDevTools();
+	// mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', function () {
 		mainWindow = null
 	})
