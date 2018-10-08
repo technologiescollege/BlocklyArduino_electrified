@@ -77,11 +77,9 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:leonardo",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "arduino",
 	},
 	arduino_mega:{
-		description: "Arduino Mega 2560",
+		description: "Arduino Mega 2560 / ADK",
 		cpu:"atmega2560",
 		speed:"115200",
 		digital : ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52"],
@@ -103,9 +101,7 @@ var profile = {
                 ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"], ["19 (Rx1) ; 18 (Tx1)", "19"], ["17 (Rx2) ; 16 (Tx2)", "17"], ["15 (Rx3) ; 14 (Tx3)", "15"]],
-		upload_arg: "arduino:avr:mega:cpu=atmega2560",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
+		upload_arg: "arduino:avr:mega",
 	},
 	arduino_micro: {
 	    description: "Arduino Micro",
@@ -131,8 +127,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:micro",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 	},
 	arduino_mini: {
 	    description: "Arduino Mini ATmega328",
@@ -156,9 +150,7 @@ var profile = {
                 ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-		upload_arg: "arduino:avr:micro",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
+		upload_arg: "arduino:avr:mini",
 	},
 	arduino_nano: {
 	    description: "Arduino Nano",
@@ -183,9 +175,7 @@ var profile = {
                 ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-		upload_arg: "arduino:avr:nano:cpu=atmega328",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
+		upload_arg: "arduino:avr:nano",
 	},
 	arduino_pro8: {
 	    description: "Arduino Pro Mini 3.3V ATmega328",
@@ -210,8 +200,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:micro",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 	},
 	arduino_pro16: {
 	    description: "Arduino Pro Mini 5V ATmega328",
@@ -236,8 +224,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:micro",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 	},
 	arduino_uno: {
 	    description: "Arduino Uno",
@@ -263,8 +249,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:uno",
-		upload_avrdude_arg: "atmega328p",
-		upload_avrdude_prog: "arduino",
 	},
 	arduino_yun: {
 	    description: "Arduino Yùn",
@@ -290,8 +274,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:yun",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 	},
 	lilypad: {
 	    description: "LilyPad Arduino ATmega328P",
@@ -317,8 +299,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:nano:cpu=atmega328",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 	},
 	dagu_rs027: {
 	    description: "Dagu RS027",
@@ -342,9 +322,7 @@ var profile = {
                 ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-		upload_arg: "arduino:avr:",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
+		upload_arg: "arduino:avr",
 	},
 	dagu_rs040: {
 	    description: "Dagu RS040",
@@ -369,8 +347,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:nano:cpu=atmega328",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 	},
 	makeblock_mcore: {
 	    description: "Makeblock mCore for mBot",
@@ -396,8 +372,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:uno",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 	},
 	makeblock_orion: {
 	    description: "Makeblock Me Orion",
@@ -423,8 +397,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:uno",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 	},
 	dfrobot_romeo:{
 		description: "RoMeo v2",
@@ -449,8 +421,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:leonardo",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 	},
 	kit_microfeux: {
 	    description: "Micro-feux Jeulin",
@@ -476,8 +446,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
 		upload_arg: "arduino:avr:uno",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 		help_link: "https://www.qwant.com/?q=microfeux%20jeulin&t=all",
 	},
 	kit_petitbot: {
@@ -503,8 +471,6 @@ var profile = {
                 ['115200', '115200']],
 		serialPin: [["Rx ; Tx", "0"]],
 		upload_arg: "B:\LiberkeyLivet\MyApps\arduino\portable\packages\esp8266\tools\esptool\0.4.8/esptool.exe -vv -cd nodemcu -cb 921600 -cp COM3 -ca 0x00000 -cf B:\LiberkeyLivet\MyApps\arduino\build/petitbot_v3.ino.bin ",
-		upload_avrdude_arg: "m2560",
-		upload_avrdude_prog: "stk500v2",
 		help_link: "https://github.com/julienrat/petitbot/blob/master/manuel_tech_petitbot.pdf",
 	}
 };
