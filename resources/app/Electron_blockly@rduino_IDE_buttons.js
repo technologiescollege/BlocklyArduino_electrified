@@ -3,6 +3,14 @@ const { exec } = require('child_process')
 const fs = require('fs-extra')
 const { ipcRenderer } = require("electron")
 
+/* fake IDE code Arduino
+** load: serial port list
+** btn_term: open modal with serial console
+** btn_factory: open modal with blocks factory
+** btn_verify_local: verify and compile in hex file
+** btn_flash_local: upload hex file in Arduino board
+*/
+
 sp.list(function(err,ports) {
 	localStorage.setItem("nb_com",ports.length)
 	ports.forEach(function(port) {
@@ -18,7 +26,7 @@ window.addEventListener('load', function load(event) {
 			var nbCom = localStorage.getItem("nb_com"), menu_com = document.getElementById('serialport'), menu_opt = menu_com.getElementsByTagName('option')
 			if(ports.length != nbCom){
 				while(menu_opt[1]) {
-					menu_com.removeChild(menu_opt[1]);
+					menu_com.removeChild(menu_opt[1])
 				}
 				ports.forEach(function(port){
 					var opt = document.createElement('option')
@@ -37,7 +45,7 @@ window.addEventListener('load', function load(event) {
 			ipcRenderer.send("prompt", "")
 			document.getElementById('local_debug').style.color = '#ffffff'
 			document.getElementById('local_debug').textContent = ''
-			} else {
+		} else {
 				document.getElementById('local_debug').style.color = '#ffffff'
 				document.getElementById('local_debug').textContent = 'Sélectionner un port COM !!!'
 				return
@@ -61,9 +69,9 @@ window.addEventListener('load', function load(event) {
 			return
 		}
 		var cmd = 'arduino-cli.exe compile --fqbn ' + upload_arg + ' ' + file_path
-		fs.appendFile(file, data, (err) => {
+		fs.writeFile(file, data, (err) => {
 			if (err) return console.log(err)
-		});
+		});		
 		document.getElementById('local_debug').style.color = '#ffffff'
 		document.getElementById('local_debug').textContent += '\nVérification : en cours...'
 		exec(cmd , {cwd: './arduino'} , (err, stdout, stderr) => {
@@ -73,7 +81,7 @@ window.addEventListener('load', function load(event) {
 				return
 			}
 			document.getElementById('local_debug').style.color = '#00ff00'
-			document.getElementById('local_debug').innerHTML = 'Vérification : OK'
+			document.getElementById('local_debug').textContent += '\nVérification : OK'
 		})
 	}
 	document.getElementById('btn_flash_local').onclick = function(event) {
@@ -96,9 +104,19 @@ window.addEventListener('load', function load(event) {
 				document.getElementById('local_debug').style.color = '#ff0000'
 				document.getElementById('local_debug').textContent = err
 				return
+			} else {
+				document.getElementById('local_debug').style.color = '#00ff00'
+				document.getElementById('local_debug').textContent = 'Téléversement : OK'
+				const path = require('path')
+				fs.readdir('.\\arduino\\tmp', (err, files) => {
+				  if (err) throw err;
+				  for (const file of files) {
+					fs.unlink(path.join('.\\arduino\\tmp', file), err => {
+					  if (err) throw err
+					})
+				  }
+				})
 			}
-			document.getElementById('local_debug').style.color = '#00ff00'
-			document.getElementById('local_debug').textContent = 'Téléversement : OK'
 		})
 	}
 })

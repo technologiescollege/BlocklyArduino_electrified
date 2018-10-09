@@ -1,1 +1,15 @@
 arduino-cli-0.3.1-alpha.preview-windows
+	
+	arduino:avr:uno
+    arduino:avr:pro:cpu=8MHzatmega168
+    arduino:avr:pro:cpu=16MHzatmega168
+    arduino:avr:pro:cpu=8MHzatmega328
+    arduino:avr:pro:cpu=16MHzatmega328
+    arduino:avr:nano:cpu=atmega168
+    arduino:avr:nano:cpu=atmega328
+    arduino:avr:nano:cpu=atmega328old
+    arduino:avr:atmegang:cpu=atmega168
+    arduino:avr:atmegang:cpu=atmega8
+    arduino:avr:leonardo
+    arduino:avr:mega:cpu=atmega2560
+    arduino:avr:mega:cpu=atmega1280

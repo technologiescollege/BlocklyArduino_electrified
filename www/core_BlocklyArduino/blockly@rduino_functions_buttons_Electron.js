@@ -54,36 +54,6 @@ BlocklyDuino.saveXmlFile = function () {
 	});
 };
 
-BlocklyDuino.saveXmlFile_IDE = function () {
-	var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-	
-	var toolbox = window.localStorage.toolbox;
-	if (!toolbox) {
-		toolbox = $("#toolboxes").val();
-	}
-	
-	if (toolbox) {
-		var newel = document.createElement("toolbox");
-		newel.appendChild(document.createTextNode(toolbox));
-		xml.insertBefore(newel, xml.childNodes[0]);
-	}
-	
-	var toolboxids = window.localStorage.toolboxids;
-	if (toolboxids === undefined || toolboxids === "") {
-		if ($('#defaultCategories').length) {
-			toolboxids = $('#defaultCategories').html();
-		}
-	}
-	
-	if (toolboxids) {
-		var newel = document.createElement("toolboxcategories");
-		newel.appendChild(document.createTextNode(toolboxids));
-		xml.insertBefore(newel, xml.childNodes[0]);
-	}
-	
-	var data = Blockly.Xml.domToPrettyText(xml);
-    BlocklyArduinoServer.IDEsaveXML(data);
-};
 /**
  * Creates an INO file containing the Arduino code from the Blockly workspace and
  * prompts the users to save it into their local file system.
@@ -99,18 +69,6 @@ BlocklyDuino.saveArduinoFile = function () {
 	document.body.appendChild(element);
 	element.click();
 	document.body.removeChild(element);
-};
-
-BlocklyDuino.saveArduinoFile_IDE = function () {
-	var data = Blockly.Arduino.workspaceToCode();
-	var datenow = Date.now();
-//NBR	  var uri = 'data:text/plain;charset=utf-8,' + encodeURIComponent(data);  
-	var uri = 'data:text/ino;charset=utf-8,' + encodeURIComponent(data); // NBR: set INO as data type to force the browser to propose to load directly the code into the arduino IDE
-	if (BlocklyArduinoServer){
-        BlocklyArduinoServer.saveCode(data);
-		} else {
-            console.log("Server problem");
-	}
 };
 
 /**
@@ -181,37 +139,6 @@ BlocklyDuino.load = function (event) {
   reader.readAsText(files[0]);
 };
 
-BlocklyDuino.load_IDE = function (event) {
-	var xml = "";
-	try {
-		xml = Blockly.Xml.textToDom(BlocklyArduinoServer ? BlocklyArduinoServer.IDEloadXML() : localStorage.workspaceXml);
-		BlocklyDuino.workspace.clear();
-		} catch (e) {}
-	var count = BlocklyDuino.workspace.getAllBlocks().length;
-	$('#tab_blocks a').tab('show');
-	Blockly.Xml.domToWorkspace(xml, BlocklyDuino.workspace);
-	BlocklyDuino.selectedTab = 'blocks';
-	BlocklyDuino.renderContent();
-	  
-	// load toolbox
-	var elem = xml.getElementsByTagName("toolbox")[0];
-	if (elem != undefined) {
-		var node = elem.childNodes[0];
-		window.localStorage.toolbox = node.nodeValue;
-		$("#toolboxes").val(node.nodeValue);		
-		// load toolbox categories
-		elem = xml.getElementsByTagName("toolboxcategories")[0];
-		if (elem != undefined) {
-			node = elem.childNodes[0];
-			window.localStorage.toolboxids = node.nodeValue;
-		}
-		var search = BlocklyDuino.addReplaceParamToUrl(window.location.search, 'toolbox', $("#toolboxes").val());
-		window.location = window.location.protocol + '//'
-				+ window.location.host + window.location.pathname
-				+ search;
-	}
-};
-
 /**
  * Discard all blocks from the workspace.
  */
@@ -269,115 +196,6 @@ BlocklyDuino.miniMenuPanel = function() {
   window.location = window.location.protocol + '//' + window.location.host + window.location.pathname + search;
 };
 
-
-/**
- * Verify code if AIO mode
- */
-BlocklyDuino.verify_local_Click = function() {
-	//first change board
-	var board = "board=" + profile.defaultBoard['upload_arg'];
-    var url = "http://127.0.0.1:5005/set_board";
-    var method = "POST";
-    var async = true;
-    var request = new XMLHttpRequest();
-    request.open(method, url, async);
-    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	//Call a function when the state changes.
-    request.onreadystatechange = function() {
-		if(request.readyState == 4 && request.status == 200) {
-			alert(request.responseText);
-		}
-	}
-    request.send(board);
-    setTimeout( function() {		
-		//then send code after 1000ms
-		var code = $('#pre_arduino').text();
-		url = "http://127.0.0.1:5005/compile";
-		request.open(method, url, async);
-		request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-		request.send(code);
-	}, 1000);
-};
-
-/**
- * Load Arduino code from component pre_arduino to webserver
- * and open it in IDE Arduino
- */
-BlocklyDuino.ArduinoIDEClick = function() {
-    var code = $('#pre_arduino').text();
-    
-    /*var url = "http://127.0.0.1:5005/openIDE";
-    var method = "POST";
-    var async = true;
-	var request = new XMLHttpRequest();*/
-	var filename = "leCodeGenere.ino";
- 
-	var element = document.createElement('a');
-	element.setAttribute('href', 'data:text/ino;charset=utf-8,' + encodeURIComponent(code)); // put INO in data type to force direct upload to arduino IDE
-	element.setAttribute('download', filename);
-	//  element.hidden = true;
-
-	element.style.display = 'none';
-	document.body.appendChild(element);
-	element.click();
-	document.body.removeChild(element);
-
-  /*request.open(method, url, async);
-	request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-	request.send(code);	*/
-};
-
-BlocklyDuino.uploadClick = function() {
-	//first change board
-	var board = "board=" + profile.defaultBoard['upload_arg'];
-    var url = "http://127.0.0.1:5005/set_board";
-    var method = "POST";
-    var async = true;
-    var request = new XMLHttpRequest();
-    request.open(method, url, async);
-    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	//Call a function when the state changes.
-	request.onreadystatechange = function() {
-		if(request.readyState == 4 && request.status == 200) {
-			alert(request.responseText);
-		}
-	}
-	request.send(board);
-    setTimeout( function() {		
-		//then send code after 1000ms
-		var code = $('#pre_arduino').text();
-		url = "http://127.0.0.1:5005/upload";
-		request.open(method, url, async);
-		request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
-		request.send(code);
-	}, 1000);
-};
-
-/**
- * Load Arduino code from component pre_arduino to webserver
- * communicate with Java server launched from Arduino IDE
- */
-BlocklyDuino.ArduinoIDEClick_IDE = function() {
-	if (!window.BlocklyArduinoServer) {
-		BlocklyArduinoServer = false;
-		}
-	var code = $('#pre_previewArduino').text();
-	if ((typeof BlocklyArduinoServer) != 'undefined' && BlocklyArduinoServer){
-        BlocklyArduinoServer.pasteCode(code);
-    }	
-};
-
-BlocklyDuino.uploadClick_IDE = function() {
-	if (!window.BlocklyArduinoServer) {
-		BlocklyArduinoServer = false;
-		}
-	var code = $('#pre_previewArduino').text();
-	if ((typeof BlocklyArduinoServer) != 'undefined' && BlocklyArduinoServer){
-        BlocklyArduinoServer.uploadCode(code);
-    }
-};
-
-
 /**
  * Try to take a screen capture of all blocks on workspace
  * Thanks to fontaine.jp from forum http://blockly.technologiescollege.fr/forum/index.php/topic,128.msg635.html#new
@@ -410,34 +228,4 @@ BlocklyDuino.workspace_capture = function() {
 		document.body.appendChild(a);
 		a.click();
 	}
-};
-
-BlocklyDuino.workspace_capture_IDE = function() {
-	var ws = BlocklyDuino.workspace.getCanvas().cloneNode(true);
-	ws.removeAttribute("width");
-	ws.removeAttribute("height");
-	ws.removeAttribute("transform");
-	var styleElem = document.createElementNS("http://www.w3.org/2000/svg", "style");
-	styleElem.textContent = Blockly.Css.CONTENT.join('') ;
-	ws.insertBefore(styleElem, ws.firstChild);
-	var bbox = BlocklyDuino.workspace.getCanvas().getBBox();
-	var canvas = document.createElement( "canvas" );
-	canvas.width = Math.ceil(bbox.width+10);
-	canvas.height = Math.ceil(bbox.height+10);
-	var ctx = canvas.getContext( "2d" );
-	var xml = new XMLSerializer().serializeToString(ws);
-	xml = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="'+bbox.width+'" height="'+bbox.height+'" viewBox="' + bbox.x + ' ' + bbox.y + ' '  + bbox.width + ' ' + bbox.height + '"><rect width="100%" height="100%" fill="white"></rect>'+xml+'</svg>';
-	var img = new Image();
-	img.setAttribute( "src", 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(xml))));
-	img.onload = function() {
-		ctx.drawImage( img, 5, 5 );
-		var canvasdata = canvas.toDataURL("image/png",1);
-		var datenow = Date.now();
-		var a = document.createElement("a");
-		a.download = "capture"+datenow+".png";
-		a.href = canvasdata;
-		document.body.appendChild(a);
-		a.click();
-		BlocklyArduinoServer.saveWorkspaceCapture(a);
-	} 
 };
