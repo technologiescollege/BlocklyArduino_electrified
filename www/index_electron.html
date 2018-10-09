@@ -18,9 +18,10 @@
 
 	<script type="text/javascript" src="core_BlocklyArduino/blockly@rduino.js"></script>
 	<script type="text/javascript" src="core_BlocklyArduino/blockly@rduino_boards.js"></script>
-	<script type="text/javascript" src="core_BlocklyArduino/blockly@rduino_functions_buttons.js"></script>
+	<script type="text/javascript" src="core_BlocklyArduino/blockly@rduino_functions_buttons_Electron.js"></script>
 	<script type="text/javascript" src="core_BlocklyArduino/blockly@rduino_tools.js"></script>
 	<script type="text/javascript" src="core_BlocklyArduino/blockly@rduino_visual.js"></script>
+	<script type="text/javascript" src="core_BlocklyArduino/blockly@rduino_visual_buttons.js"></script>
 
 	<script type="text/javascript" src="core_BlocklyArduino/libs/jquery-2.1.3.min.js" onload="window.$ = window.jQuery = module.exports;"></script> 
 	<script type="text/javascript" src="core_BlocklyArduino/libs/jquery-ui.js"></script>
@@ -563,7 +564,8 @@
 		    </div>    
 			<div class="modal-body" id="modal-body-config-global">						
 				<div class="arduino_card_mini_picture_div">
-				    <img id="arduino_card_mini_picture"/>
+				    <img id="arduino_card_mini_picture">
+					</img>
 				</div>
 				<div class="modal-body-config-global_left">					
 	                <span class="fa fa-language"></span>  <label id="span_languageMenu"> </label>  <select id="languageMenu"></select><br/>
@@ -650,5 +652,5 @@
 	</div>
 	<div id="arduino_IDE_code"> </div>
 </body>
-<script>require('../resources/app/blockly@rduino_IDE_buttons_Electron.js')</script>
+<script>require('../resources/app/Electron_blockly@rduino_IDE_buttons.js')</script>
 </html>

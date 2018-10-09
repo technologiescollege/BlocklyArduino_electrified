@@ -256,12 +256,10 @@ html[dir="RTL"] .divSwitch-hor {
 	position:absolute;
 	top:0;
 	right:5px;
-	max-width:250px;
-	max-height:300px;
 }
 
 #arduino_card_mini_picture {
-	max-width:250px;
+	max-width:220px;
 	max-height:300px;
 }
 
