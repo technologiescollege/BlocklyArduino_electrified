@@ -322,13 +322,13 @@ html[dir="RTL"] #languageMenu {
 
 #blockly_l{
 	float:left;
-	height:100%;
-	width:50%;
+	height:99%;
+	width:49%;
 }
 #blockly_r{
 	float:right;
-	height:100%;
-	width:50%;
+	height:99%;
+	width:49%;
 }
 #btn_group {
 	position: absolute;
