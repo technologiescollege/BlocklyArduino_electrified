@@ -542,7 +542,7 @@
         <h4 class="modal-title" id="editModalLabel"></h4>
       </div>
       <div class="modal-body" id="modal-body-code">
-            <textarea id="edit_code" rows="20" cols="100"></textarea>
+            <textarea id="edit_code" rows="20" cols="85"></textarea>
       </div>
       <div class="modal-footer">
         <button id="btn_closeCode" type="button" class="btn btn-default" data-dismiss="modal" ></button>
@@ -645,6 +645,24 @@
 		</div>
 	</div>
 </div>
+	<!-- variable modal -->
+	<div class="modal fade" id="variableModal" tabindex="-1" role="dialog" aria-labelledby="variableModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-body" id="modal-body-variableModal">
+					<div class="form-group">
+						<label ><div id = "variableModalLabel" class="modal-title"></div></label>
+						<div class="input-group input-group-md icon-addon addon-md">
+							<input type="text" class="form-control" id="var_name">
+							<span class="input-group-btn">
+								<button id="btn_variable" type="button" class="btn btn-info" data-dismiss="modal"></button>
+							</span>
+						</div>
+					</div>
+				</div>  
+			</div>
+		</div>
+	</div>
 	<!--only for IDE mode -->
 	<div id="wiring_dialog">
 		<iframe frameborder="0" marginwidth="0" marginheight="0">
