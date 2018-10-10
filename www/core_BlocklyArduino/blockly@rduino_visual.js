@@ -26,6 +26,13 @@ Blockly.makeColour = function(color) {
 	return color;
 };
 
+BlocklyDuino.changeFont = function() {
+	var checkbox = document.getElementById('fontChoice');
+	if (checkbox.checked == true) {
+		document.body.style.fontFamily = "OpenDyslexic";
+	} else document.body.style.fontFamily = "Trebuchet MS";
+};
+
 BlocklyDuino.cardPicture_maxi = function() {
 	var img = $("#arduino_card_picture");
 	var modal = $("#pictureModalLabel").parent();

@@ -46,10 +46,10 @@ window.addEventListener('load', function load(event) {
 			document.getElementById('local_debug').style.color = '#ffffff'
 			document.getElementById('local_debug').textContent = ''
 		} else {
-				document.getElementById('local_debug').style.color = '#ffffff'
-				document.getElementById('local_debug').textContent = 'Sélectionner un port COM !!!'
-				return
-		}				
+			document.getElementById('local_debug').style.color = '#ffffff'
+			document.getElementById('local_debug').textContent = 'Sélectionner un port COM !!!'
+			return
+		}
 	}
 	document.getElementById('btn_factory').onclick = function(event) {
 		ipcRenderer.send("factory", "")		
@@ -85,6 +85,35 @@ window.addEventListener('load', function load(event) {
 		})
 	}
 	document.getElementById('btn_flash_local').onclick = function(event) {
+		var file_path = '.\\tmp'
+		var file = '.\\arduino\\tmp\\tmp.ino'
+		var data = $('#pre_arduino').text()
+		var carte = document.getElementById('board_select').value
+		if (carte != "none") {
+			document.getElementById('local_debug').style.color = '#ffffff'
+			document.getElementById('local_debug').textContent = 'Carte ' + profile.defaultBoard['description']
+			var upload_arg = profile.defaultBoard['upload_arg']
+		} else {
+			document.getElementById('local_debug').style.color = '#ffffff'
+			document.getElementById('local_debug').textContent = 'Sélectionner une carte !!!'
+			return
+		}
+		var cmd = 'arduino-cli.exe compile --fqbn ' + upload_arg + ' ' + file_path
+		fs.writeFile(file, data, (err) => {
+			if (err) return console.log(err)
+		});		
+		document.getElementById('local_debug').style.color = '#ffffff'
+		document.getElementById('local_debug').textContent += '\nVérification : en cours...'
+		exec(cmd , {cwd: './arduino'} , (err, stdout, stderr) => {
+			if (stderr) {
+				document.getElementById('local_debug').style.color = '#ff0000'
+				document.getElementById('local_debug').textContent = stderr
+				return
+			}
+			document.getElementById('local_debug').style.color = '#00ff00'
+			document.getElementById('local_debug').textContent += '\nVérification : OK'
+		})
+		
 		var file_path = '.\\tmp'
 		var carte = document.getElementById('board_select').value
 		var com = document.getElementById('serialport').value
