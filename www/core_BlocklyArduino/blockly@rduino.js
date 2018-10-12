@@ -280,9 +280,6 @@ BlocklyDuino.bindFunctions = function() {
 		$('#pre_arduino').css({'height' : '95%'});
 		} else {
 			$('#btn_pasteIDEArduino').remove();
-			// $('#btn_verify_local').on("click", BlocklyDuino.verify_local_Click);
-			// $('#btn_flash_local').on("click", BlocklyDuino.uploadClick);
-			// $('#btn_pasteIDEArduino').on("click", BlocklyDuino.ArduinoIDEClick);
 			$('#btn_saveArduino').on("click", BlocklyDuino.saveArduinoFile);
 			$('#btn_block_capture').on("click", BlocklyDuino.workspace_capture);
 			$('#btn_saveXML, #menu_12').on("click", BlocklyDuino.saveXmlFile);
@@ -411,11 +408,12 @@ BlocklyDuino.bindFunctions = function() {
 	});	
 	
 	$('#btn_valid_first_msg').on("click", function() {
-		if ($('#first_msg').prop("checked")) {
-			window.sessionStorage.msg_first_seen = true;
-		}
 		$('#firstModal').modal('hide');
 		$('#videoFirstModal').remove();
+		if ($('#first_msg').prop("checked")) {
+			window.sessionStorage.msg_first_seen = true;
+			$('#firstModal iframe').remove();
+		}
 	});
 
 	$('#firstModal').on('hidden.bs.modal', function (e) {
