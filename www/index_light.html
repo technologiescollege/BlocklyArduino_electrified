@@ -30,13 +30,10 @@
 	<script type="text/javascript" src="core/libs/clipboard.min.js"></script>
 	<script type="text/javascript" src="core/libs/head.load.min.js"></script>
 	<script type="text/javascript" src="core/libs/html2canvas.min.js"></script>
+	<script type="text/javascript" src="core/libs/canvas2image.js"></script>
 	<script type="text/javascript" src="core/libs/jscolor.js"></script>
 	<script type="text/javascript" src="core/libs/prettify.min.js"></script>
 	<script type="text/javascript" src="core/libs/smoothie.js"></script>
-
-	<!--TechnoZone51-->
-	<script type="text/javascript" src="tools/TZ51/canvas2image.js"></script>
-	<!--Fin TZ51-->
 
 	<!-- define all additional blocks from one resumer-->
 	<script type="text/javascript" src="blocks/arduino_resume.js"></script>
@@ -61,7 +58,9 @@
 <div class="loading"></div>
 <div id="header">
 	<div id="logo_Titre">
-		<a href="./index_light.html"><img id="clearLink" src="media/logo-mini.png" border="0" height="36px" onclick="" /></a>
+		<a href="./index_light.html">
+			<img id="clearLink" src="media/logo-mini.png" border="0" height="36px" onclick="" />
+		</a>
 	</div>
 	<div id="header_titres">
 		<div id="divTitreMenu" class="hidden">
@@ -260,7 +259,7 @@
 				<!--button id="btn_wiring" class="btn btn-primary">
 					<span class="glyphicon glyphicon-blackboard"></span>
 				</button-->
-				<button id="btn_factory" class="btn btn-primary">
+				<button id="btn_factory" class="btn btn-primary" >
 				   <span class="fa fa-industry"> </span>
 				</button>
 				<button id="btn_RGB" class="btn btn-primary">
@@ -322,6 +321,9 @@
 							<!-- <span id="span_pasteIDEArduino"> </span> -->
 						<!-- </button> -->
 						<span id="survol" style="color:white"></span>
+						<div id="checkDetails">
+							<input type="checkbox" disabled name="detailedCompilation" id="detailedCompilation"/> <span id="span_detailedCompilation"> </span>
+						</div>
 					</div>
 					<pre id="pre_arduino"></pre>
 					<div id="barre_h"><br /></div>

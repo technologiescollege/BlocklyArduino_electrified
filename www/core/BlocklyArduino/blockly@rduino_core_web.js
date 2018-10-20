@@ -275,21 +275,22 @@ BlocklyDuino.bindFunctions = function() {
 		// $('#tab_arduino').remove();
 		// $('#pre_arduino').css({'height' : '95%'});
 		// } else {
-			$('#btn_pasteIDEArduino').remove();
-			$('#btn_saveArduino').on("click", BlocklyDuino.saveArduinoFile);
-			$('#btn_block_capture').on("click", BlocklyDuino.workspace_capture);
-			$('#btn_saveXML, #menu_12').on("click", BlocklyDuino.saveXmlFile);
-			$('#btn_validCode').on("click", BlocklyDuino.valideEditedCode);
-			$('#load').on("change", BlocklyDuino.load);
-			$('#btn_fakeload, #menu_11').on("click", function() {
-				$('#load').click();
-			});
-			$('#btn_preview').on("click", function() {
-				$("#toggle_code").toggle("blind");
-			});
-			$('#pre_previewArduino').on("click", function() {
-				$("#toggle_code").toggle("blind");
-			});
+	$('#btn_pasteIDEArduino').remove();
+	$('#btn_saveArduino').on("click", BlocklyDuino.saveArduinoFile);
+	$('#btn_block_capture').on("click", BlocklyDuino.workspace_capture);
+	$('#btn_saveXML, #menu_12').on("click", BlocklyDuino.saveXmlFile);
+	$('#btn_validCode').on("click", BlocklyDuino.valideEditedCode);
+	$('#btn_factory').on("click", "location.href='./tools/factory/factory.html';");
+	$('#load').on("change", BlocklyDuino.load);
+	$('#btn_fakeload, #menu_11').on("click", function() {
+		$('#load').click();
+	});
+	$('#btn_preview').on("click", function() {
+		$("#toggle_code").toggle("blind");
+	});
+	$('#pre_previewArduino').on("click", function() {
+		$("#toggle_code").toggle("blind");
+	});
 		// }
 		
 	$('#toggle-Colors').on("change", BlocklyDuino.toggleTextColors);

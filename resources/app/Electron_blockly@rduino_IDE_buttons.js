@@ -79,7 +79,7 @@ window.addEventListener('load', function load(event) {
 		fs.writeFile(file, data, (err) => {
 			if (err) return console.log(err)
 		});		
-		document.getElementById('local_debug').textContent += '\nVérification : en cours...'
+		document.getElementById('local_debug').textContent += '\nVérification : en cours...\n'
 		exec(cmd , {cwd: './arduino'} , (err, stdout, stderr) => {
 			if (stderr) {
 				document.getElementById('local_debug').style.color = '#ff0000'
@@ -87,6 +87,7 @@ window.addEventListener('load', function load(event) {
 				return
 			}
 			document.getElementById('local_debug').style.color = '#00ff00'
+			document.getElementById('local_debug').textContent += stdout
 			document.getElementById('local_debug').textContent += '\nVérification : OK'
 		})
 	}
@@ -138,11 +139,12 @@ window.addEventListener('load', function load(event) {
 		exec(cmd , {cwd: './arduino'} , (err, stdout, stderr) => {
 			if (err) {
 				document.getElementById('local_debug').style.color = '#ff0000'
-				document.getElementById('local_debug').textContent = err
+				document.getElementById('local_debug').textContent = stderr
 				return
 			} else {
 				document.getElementById('local_debug').style.color = '#00ff00'
-				document.getElementById('local_debug').textContent = 'Téléversement : OK'
+				document.getElementById('local_debug').textContent += stdout
+				document.getElementById('local_debug').textContent += 'Téléversement : OK'
 				const path = require('path')
 				fs.readdir('.\\arduino\\tmp', (err, files) => {
 				  if (err) throw err;
