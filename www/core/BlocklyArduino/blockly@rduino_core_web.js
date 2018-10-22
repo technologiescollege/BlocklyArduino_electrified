@@ -173,8 +173,7 @@ BlocklyDuino.addReplaceParamToUrl = function(url, param, value) {
 	var separator = url.indexOf('?') !== -1 ? "&" : "?";
 	if (url.match(re)) {
 		return url.replace(re, '$1' + param + "=" + value + '$2');
-	}
-	else {
+	} else {
 		return url + separator + param + "=" + value;
 	}
 };
@@ -231,7 +230,7 @@ BlocklyDuino.setArduinoCard =  function () {
 	$("#board_select").val(cardId);
 	
 	// set the card from url parameters
-	profile["defaultBoard"]=profile[cardId];
+	profile["defaultBoard"] = profile[cardId];
 	$('#arduino_card_picture').attr("src", profile.defaultBoard['picture']);
 	$('#arduino_card_miniPicture').attr("src", profile.defaultBoard['miniPicture']);
 	$('#arduino_card_miniPicture_Menu').attr("src", profile.defaultBoard['miniPicture_hor']);	
@@ -682,7 +681,7 @@ BlocklyDuino.loadToolboxDefinition = function(toolboxFile) {
 		toolboxFile += '_functions';
 	}
 	
-	$.ajax( {
+	$.ajax({
 				type: "GET",
 				url: "./toolbox/" + toolboxFile + ".xml",
 				dataType: "xml",
