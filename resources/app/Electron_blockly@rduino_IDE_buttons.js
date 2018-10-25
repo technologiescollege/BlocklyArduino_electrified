@@ -70,20 +70,23 @@ window.addEventListener('load', function load(event) {
 			document.getElementById('local_debug').style.color = '#ffffff'
 			document.getElementById('local_debug').textContent = 'Carte ' + profile.defaultBoard['description']
 			var upload_arg = profile.defaultBoard['upload_arg']
-		} else {
-			document.getElementById('local_debug').style.color = '#ffffff'
-			document.getElementById('local_debug').textContent = 'Sélectionner une carte !!!'
-			return
+			} else {
+				document.getElementById('local_debug').style.color = '#ff0000'
+				document.getElementById('local_debug').textContent = 'Sélectionner une carte !'
+				return
 		}
-		var cmd = 'arduino-cli.exe compile --fqbn ' + upload_arg + ' ' + file_path
+		if ($('#detailedCompilation').prop('checked'))
+				var cmd = 'arduino-cli.exe --debug compile --fqbn ' + upload_arg + ' ' + file_path
+			else
+				var cmd = 'arduino-cli.exe compile --fqbn ' + upload_arg + ' ' + file_path
 		fs.writeFile(file, data, (err) => {
 			if (err) return console.log(err)
 		});		
 		document.getElementById('local_debug').textContent += '\nVérification : en cours...\n'
-		exec(cmd , {cwd: './arduino'} , (err, stdout, stderr) => {
-			if (stderr) {
+		exec(cmd , {cwd: './arduino'} , (error, stdout, stderr) => {
+			if (error) {
 				document.getElementById('local_debug').style.color = '#ff0000'
-				document.getElementById('local_debug').textContent = stderr
+				document.getElementById('local_debug').textContent += stderr
 				return
 			}
 			document.getElementById('local_debug').style.color = '#00ff00'
@@ -96,35 +99,37 @@ window.addEventListener('load', function load(event) {
 		var carte = document.getElementById('board_select').value
 		var com = document.getElementById('serialport').value
 		if (carte=="none"||com=="no_com"){
-			document.getElementById('local_debug').style.color = '#ffffff'
-			document.getElementById('local_debug').textContent = 'Sélectionner un port et une carte !!!'
+			document.getElementById('local_debug').style.color = '#ff0000'
+			document.getElementById('local_debug').textContent = 'Sélectionner un port !'
 			return
-		}
-		document.getElementById('local_debug').style.color = '#ffffff'
-		document.getElementById('local_debug').textContent = 'Carte ' + profile.defaultBoard['description'] + ' sur port ' + com
-		var upload_arg = profile.defaultBoard['upload_arg']
-		var cmd = 'arduino-cli.exe upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
-		document.getElementById('local_debug').style.color = '#ffffff'
-		document.getElementById('local_debug').textContent = 'Téléversement : en cours...\n'
-		exec(cmd , {cwd: './arduino'} , (err, stdout, stderr) => {
-			if (err) {
-				document.getElementById('local_debug').style.color = '#ff0000'
-				document.getElementById('local_debug').textContent = stderr
-				return
 			} else {
-				document.getElementById('local_debug').style.color = '#00ff00'
-				document.getElementById('local_debug').textContent += stdout
-				document.getElementById('local_debug').textContent += '\nTéléversement : OK'
-				const path = require('path')
-				fs.readdir('.\\arduino\\tmp', (err, files) => {
-				  if (err) throw err;
-				  for (const file of files) {
-					fs.unlink(path.join('.\\arduino\\tmp', file), err => {
-					  if (err) throw err
-					})
-				  }
-				})
+				document.getElementById('local_debug').style.color = '#ffffff'
+				document.getElementById('local_debug').textContent = 'Carte ' + profile.defaultBoard['description'] + ' sur port ' + com
+				var upload_arg = profile.defaultBoard['upload_arg']
+		}
+		if ($('#detailedCompilation').prop('checked'))
+				var cmd = 'arduino-cli.exe --debug upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
+			else
+				var cmd = 'arduino-cli.exe upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
+		document.getElementById('local_debug').textContent = 'Téléversement : en cours...\n'
+		exec(cmd , {cwd: './arduino'} , (error, stdout, stderr) => {
+			if (error) {
+				document.getElementById('local_debug').style.color = '#ff0000'
+				document.getElementById('local_debug').textContent += stderr
+				return
 			}
+			document.getElementById('local_debug').style.color = '#00ff00'
+			document.getElementById('local_debug').textContent += stdout
+			document.getElementById('local_debug').textContent += '\nTéléversement : OK'
+			const path = require('path')
+			fs.readdir('.\\arduino\\tmp', (err, files) => {
+			  if (err) throw err;
+			  for (const file of files) {
+				fs.unlink(path.join('.\\arduino\\tmp', file), err => {
+				  if (err) throw err
+				})
+			  }
+			})
 		})
 	}
 })
