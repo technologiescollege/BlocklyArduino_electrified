@@ -372,7 +372,7 @@ BlocklyDuino.uploadClick_IDE = function() {
  * Thanks to fontaine.jp from forum http://blockly.technologiescollege.fr/forum/index.php/topic,128.msg635.html#new
  *
  */
-BlocklyDuino.workspace_capture = function() {
+BlocklyDuino.workspace_capture_IDE = function() {
 	var ws = BlocklyDuino.workspace.svgBlockCanvas_.cloneNode(true);
 	ws.removeAttribute("width");
 	ws.removeAttribute("height");
