@@ -23,7 +23,7 @@ function createWindow () {
 		icon:'./favicon.ico'
 		})
 	if (process.platform == 'win32' && process.argv.length >= 2) {
-		mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html?url='+process.argv[1]))
+		mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html?'+process.argv[1]))
 	} else {
 		mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html'))
 	}
