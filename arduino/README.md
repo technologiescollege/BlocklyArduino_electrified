@@ -1,4 +1,5 @@
-﻿# arduino-cli
+﻿
+# arduino-cli
 
 `arduino-cli` est une solution tout-en-un qui fournit le compilateur, le gestionnaire de cartes/bibliothèques, le système de téléversement, la découverte et de nombreux autres outils nécessaires à l'utilisation de toute carte et plate-forme compatible Arduino.
 
@@ -200,6 +201,11 @@ Nous sommes maintenant prêts à l'installer ! Veuillez vous assurer d'utiliser 
     WiFi101@0.15.2 downloaded
     Installed WiFi101@0.15.2
 
+### 8. Mettre à jour toutes les bibliothèques
+Il suffit de taper :
+
+    $ arduino-cli lib upgrade
+      
 
 ## Commandes usuelles
 
@@ -209,6 +215,19 @@ Nous sommes maintenant prêts à l'installer ! Veuillez vous assurer d'utiliser 
     arduino-cli compile --fqbn arduino: ...
     arduino-cli upload -p COMx --fqbn arduino: ...
     arduino-cli lib install "WiFi101"
+	arduino-cli lib upgrade
+
+## Quoi est où ?
+Le dossier **arduino** contient les exécutables.
+	
+
+ - Le dossier **arduino\libraries** contient les bibliothèques officielles,    avec l'EDI au départ.
+ - Le dossier **arduino\packages** contient les définitions, les noyaux, etc.
+ - Le dossier **arduino\tmp** sert de façon temporaire pour la compilation/téléversement.
+	
+Le dossier **sketchbook** contient *vos* fichiers .ino.
+	
+ - Le dossier **sketchbook\libraries** contient vos bibliothqèues personnelles.
 
 ## Aide en ligne
 

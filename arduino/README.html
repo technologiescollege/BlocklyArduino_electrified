@@ -18,6 +18,7 @@
 <li><a href="#utilisation">Utilisation</a></li>
 <li><a href="#étapes-usuelles">Étapes usuelles</a></li>
 <li><a href="#commandes-usuelles">Commandes usuelles</a></li>
+<li><a href="#quoi-est-où-">Quoi est où ?</a></li>
 <li><a href="#aide-en-ligne">Aide en ligne</a></li>
 </ul>
 </li>
@@ -213,6 +214,10 @@ Downloading libraries...
 WiFi101@0.15.2 downloaded
 Installed WiFi101@0.15.2
 </code></pre>
+<h3 id="mettre-à-jour-toutes-les-bibliothèques">8. Mettre à jour toutes les bibliothèques</h3>
+<p>Il suffit de taper :</p>
+<pre><code>$ arduino-cli lib upgrade
+</code></pre>
 <h2 id="commandes-usuelles">Commandes usuelles</h2>
 <pre><code>arduino-cli core update-index
 arduino-cli board list
@@ -220,7 +225,19 @@ arduino-cli core list
 arduino-cli compile --fqbn arduino: ...
 arduino-cli upload -p COMx --fqbn arduino: ...
 arduino-cli lib install "WiFi101"
+arduino-cli lib upgrade
 </code></pre>
+<h2 id="quoi-est-où-">Quoi est où ?</h2>
+<p>Le dossier <strong>arduino</strong> contient les exécutables.</p>
+<ul>
+<li>Le dossier <strong>arduino\libraries</strong> contient les bibliothèques officielles,    avec l’EDI au départ.</li>
+<li>Le dossier <strong>arduino\packages</strong> contient les définitions, les noyaux, etc.</li>
+<li>Le dossier <strong>arduino\tmp</strong> sert de façon temporaire pour la compilation/téléversement.</li>
+</ul>
+<p>Le dossier <strong>sketchbook</strong> contient <em>vos</em> fichiers .ino.</p>
+<ul>
+<li>Le dossier <strong>sketchbook\libraries</strong> contient vos bibliothqèues personnelles.</li>
+</ul>
 <h2 id="aide-en-ligne">Aide en ligne</h2>
 <p><code>arduino-cli</code> est un conteneur de commandes, pour voir la liste complète il faut exécuter :</p>
 <pre class=" language-bash"><code class="prism  language-bash">$ arduino-cli
