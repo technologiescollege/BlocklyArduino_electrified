@@ -306,9 +306,6 @@
                             <button id="btn_verify_local" class="btn btn-arduino">
                                 <span class="fas fa-check fa-1_5x fa-fw"> </span>
                             </button>
-                            <select id="serialport">
-                                <option value="no_com" selected>Choisir le port</option>
-                            </select>
                             <button id="btn_flash_local" class="btn btn-arduino">
                                 <span class="fas fa-arrow-right fa-1_5x fa-fw"> </span>
                             </button>
@@ -320,12 +317,13 @@
                             <!-- <span id="span_pasteIDEArduino"> </span> -->
                             <!-- </button> -->
                             <span id="survol" style="color:white"></span>
+                        </div>
+                        <pre id="pre_arduino"></pre>
+                        <div id="barre_h">
                             <div id="checkDetails">
                                 <input type="checkbox" name="detailedCompilation" id="detailedCompilation"/> <span id="span_detailedCompilation" style="color: white;"> </span>
                             </div>
-                        </div>
-                        <pre id="pre_arduino"></pre>
-                        <div id="barre_h"><br /></div>
+						</div>
                         <div id="local_debug"></div>
                         <div id="barre"></div>
                     </div>
@@ -577,6 +575,10 @@
                                     </optgroup>
                                 </select>
                             </div>
+                            <select id="serialport">
+                                <option value="no_com" selected>Choisir le port</option>
+                            </select>
+                            <br />
                             <br />
                             <span class="glyphicon glyphicon-text-background"></span>  <label id="span_colorToggle"> </label>
                             <br />
