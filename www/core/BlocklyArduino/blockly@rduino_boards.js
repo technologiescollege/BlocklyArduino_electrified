@@ -322,7 +322,7 @@ var profile = {
                 ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-		upload_arg: "arduino:avr:atmegang:cpu=atmega8",
+		upload_arg: "arduino:avr:pro:cpu=8MHzatmega168",
 	},
 	dagu_rs040: {
 	    description: "Dagu RS040",
@@ -346,7 +346,7 @@ var profile = {
                 ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
                 ['115200', '115200']],
 		serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-		upload_arg: "arduino:avr:pro:cpu=16MHzatmega328",
+		upload_arg: "arduino:avr:nano:cpu=atmega328",
 	},
 	makeblock_mcore: {
 	    description: "Makeblock mCore for mBot",
