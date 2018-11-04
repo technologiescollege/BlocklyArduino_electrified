@@ -29,7 +29,7 @@ function createWindow () {
 		mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html'))
 	}
 	mainWindow.setMenu(null);
-	//mainWindow.webContents.openDevTools();
+	// mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', function () {
 		mainWindow = null
 	})
@@ -52,8 +52,8 @@ function createTerm() {
 		frame:true,
 		modal:false
 		}) 
-	//termWindow.webContents.openDevTools();
-	termWindow.loadURL(path.join(__dirname, "../../www/tools/serialconsole/term.html"))
+	// termWindow.webContents.openDevTools();
+	termWindow.loadURL(path.join(__dirname, "../../www/tools/serialconsole/serialconsole.html"))
 	termWindow.setMenu(null);
 	termWindow.on('closed', function () { 
 		termWindow = null 
