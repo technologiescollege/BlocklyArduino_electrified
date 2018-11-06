@@ -19,7 +19,8 @@ sp.list(function(err,ports) {
 		opt.text = port.comName
 		document.getElementById('serialport').appendChild(opt)
 	})
-}) 
+})
+
 window.addEventListener('load', function load(event) {
 	$('#serialport').mouseover(function(event) {
 		sp.list(function(err,ports) {
