@@ -227,7 +227,7 @@ Le dossier **arduino** contient les exécutables.
 	
 Le dossier **sketchbook** contient *vos* fichiers .ino.
 	
- - Le dossier **sketchbook\libraries** contient vos bibliothqèues personnelles.
+ - Le dossier **sketchbook\libraries** contient VOS bibliothqèues personnelles.
 
 ## Aide en ligne
 
