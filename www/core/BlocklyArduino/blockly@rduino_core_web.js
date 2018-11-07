@@ -66,11 +66,13 @@ BlocklyDuino.renderContent = function() {
 				alert(e);
 			}
 			$("#tools_blocks").hide();
+			$("#divTitre").hide();
 			break;
 
 		case 'content_supervision':
 			$("#content_supervision").load('./tools/supervision/pymata_arduino.html', BlocklyDuino.renderSupervisionContent);
 			$("#tools_blocks").hide();
+			$("#divTitre").hide();
 		}
 	}	
 };
