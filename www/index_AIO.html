@@ -165,7 +165,7 @@
 					<button id="btn_verify_local" class="btn btn-arduino">
 						<span class="fas fa-check fa-1_5x fa-fw"> </span>
 					</button>
-					<select id="serialport">
+					<select id="serialport_ide" class="synchCOMport">
 						<option value="no_com" selected>Choisir le port</option>
 					</select>
 					<button id="btn_flash_local" class="btn btn-arduino">
@@ -183,7 +183,7 @@
             </div>
             <div id="header_supervision">
 				<div id="barre">
-					<select id="serialport_sup">
+					<select id="serialport_sup" class="synchCOMport">
 						<option value="no_com" selected>Choisir le port</option>
 					</select>
 					<button id="btn_flash_pymata" class="btn btn-arduino">
@@ -279,7 +279,7 @@
                         <span class="fas fa-cloud-download-alt"></span>
                         <span id="span_saveXML"> </span>
                     </a>
-                    <button id="btn_fakeload" class="btn btn-success btn-block">
+                    <button id="btn_fakeload" class="btn btn-success btn-block" accept="*.B@, *.xml">
                         <span class="fas fa-cloud-upload-alt"></span>
                         <span id="span_fakeload"> </span>
                     </button>
@@ -652,5 +652,7 @@
         </div>
         <div id="arduino_IDE_code"> </div>
     </body>
-<script>require('../resources/app/Electron_blockly@rduino_IDE_buttons.js')</script>
+	<script>
+		require('../resources/app/Electron_blockly@rduino_IDE_buttons_AIO.js')
+	</script>
 </html>
