@@ -5,11 +5,36 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const userDataPath = app.getPath ('userData')
 
-app.setPath ('userData', app.getAppPath());
+//read INI file
+const fs = require('fs-extra')
+var fileSettings = "./Blockly@rduino.json"
+var Settings = ""
+var Settings_blank = {"arg":""}
+
+if(!fs.existsSync(fileSettings)) {
+	console.log("File not found")
+	fs.writeFileSync(fileSettings, JSON.stringify(Settings_blank), (err) => {
+        if(err){
+            console.log("An error ocurred creating the file "+ err.message)
+        }                    
+        console.log("The file has been succesfully saved")
+	})
+} else {
+	Settings = fs.readFileSync(fileSettings, 'utf8', (err, Settings) => {
+		if(err){
+			console.log("An error occured reading the file :" + err.message)
+			return
+		}
+	Settings = JSON.parse(Settings)
+	console.log("The file Settings is : " + Settings)
+	})
+}
 
 let mainWindow
 let termWindow
 let factoryWindow
+
+app.setPath ('userData', app.getAppPath())
 
 app.on('window-all-closed', () => {
 	mainWindow.webContents.session.clearStorageData()
@@ -23,15 +48,25 @@ function createWindow () {
 		height:800,
 		icon:'./favicon.ico'
 		})
-	if (process.platform == 'win32' && process.argv.length >= 2) {
-		if (((process.argv[1]).substring(0, 9)) == "index_AIO") {
-			mainWindow.loadURL(path.join(__dirname, '../../www/' + process.argv[1]))
-		}
-		else {
-			mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html?' + process.argv[1]))
+	if (Settings == "" || Settings == "undefined") {
+		if (process.platform == 'win32' && process.argv.length >= 2) {
+			if (((process.argv[1]).substring(0, 9)) == "index_AIO") {
+				mainWindow.loadURL(path.join(__dirname, '../../www/' + process.argv[1]))
+			}
+			else {
+				mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html?' + process.argv[1]))
+			}
+		} else {
+			mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html'))
 		}
 	} else {
-			mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html'))
+		mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html?' + JSON.parse(Settings).arg))
+		fs.writeFileSync("error-log.json", JSON.parse(Settings).arg, (err) => {
+			if(err){
+				console.log("An error ocurred creating the file "+ err.message)
+			}                    
+			console.log("The file has been succesfully saved")
+		})
 	}
 	mainWindow.setMenu(null);
 	// mainWindow.webContents.openDevTools();
