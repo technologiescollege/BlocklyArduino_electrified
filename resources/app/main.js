@@ -1,6 +1,7 @@
 const electron = require('electron')
 const {ipcMain} = require('electron')
 const app = electron.app
+
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const userDataPath = app.getPath ('userData')
@@ -46,7 +47,12 @@ function createWindow () {
 	mainWindow = new BrowserWindow({
 		width:1280,
 		height:800,
-		icon:'./favicon.ico'
+		titleBarStyle: 'hidden',
+		icon:'./favicon.ico',
+		"webPreferences":{
+			"webSecurity":false,
+			"allowRunningInsecureContent":true
+			}
 		})
 	if (Settings == "" || Settings == "undefined") {
 		if (process.platform == 'win32' && process.argv.length >= 2) {
@@ -69,7 +75,7 @@ function createWindow () {
 		})
 	}
 	mainWindow.setMenu(null);
-	// mainWindow.webContents.openDevTools();
+	mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', function () {
 		mainWindow = null
 	})

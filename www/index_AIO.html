@@ -16,7 +16,7 @@
         <!--Arduino generator, must be defined NOW-->
         <script type="text/javascript" src="generators/generator_arduino.js"></script>
 
-        <script type="text/javascript" src="core/BlocklyArduino/blockly@rduino_core_Electron.js"></script>
+        <script type="text/javascript" src="core/BlocklyArduino/blockly@rduino_core_AIO.js"></script>
         <script type="text/javascript" src="core/BlocklyArduino/blockly@rduino_boards.js"></script>
         <script type="text/javascript" src="core/BlocklyArduino/blockly@rduino_functions_buttons_Electron.js"></script>
         <script type="text/javascript" src="core/BlocklyArduino/blockly@rduino_tools.js"></script>
@@ -193,7 +193,11 @@
                         <span id="span_flash_pymata"> </span>
 					</button>
 					<span id="span_pymata_toggle_text" style="color:white"></span>
-					<input id="toggle-pymata" data-toggle="toggle" data-off="<span id='span_pymataOFF'> </span>" data-on="<span id='span_pymataON'> </span>" data-onstyle="primary" data-offstyle="default" data-width="120" type="checkbox"/>
+					<button id="toggle-pymata" class="btn btn-arduino">
+						<span class="fas fa-arrow-right fa-1_5x fa-fw"> </span>
+                        <span id="span_flash_pymata"> </span>
+					</button>
+					<!-- <input id="toggle-pymata" data-toggle="toggle" data-off="<span id='span_pymataOFF'> </span>" data-on="<span id='span_pymataON'> </span>" data-onstyle="primary" data-offstyle="default" data-width="120" type="checkbox"/> -->
 					<span id="sup_debug" style="color:white"></span>
 				</div>
             </div>
@@ -650,6 +654,16 @@
                 </div>
             </div>
         </div>
+		<!-- message modal -->
+		<div class="modal fade" id="message" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-body" >
+						<div id = "messageDIV"></div>
+					</div>  
+				</div>
+			</div>
+		</div>
         <!--only for IDE mode -->
         <div id="wiring_dialog">
             <iframe frameborder="0" marginwidth="0" marginheight="0">

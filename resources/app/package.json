@@ -4,7 +4,7 @@
   "description": "environnement de développement pour langage graphique",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron . --allow-file-access-from-files",
     "install": "electron-rebuild"
   },
   "repository": {
