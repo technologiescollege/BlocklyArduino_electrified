@@ -46,6 +46,16 @@ menu_com.addEventListener('mouseover', function(event) {
 }, false)
 
 window.addEventListener('load', function load(event) {
+	document.getElementById('btn_saveConfigGlobale_id').onclick = function(event) {
+		var fileSettings = "./Blockly@rduino.json"
+		var Settings = window.location.search
+		fs.writeFileSync(fileSettings, JSON.stringify(window.location.search), (err) => {
+			if(err){
+				console.log("An error ocurred creating the file "+ err.message)
+			}                    
+			console.log("The file has been succesfully saved")
+		})
+	}
 	document.getElementById('btn_term').onclick = function(event) {
 		var com = document.getElementById('serialport_ide').value
 		if (com != "no_com") {
@@ -89,7 +99,7 @@ window.addEventListener('load', function load(event) {
 				var cmd = 'arduino-cli.exe compile --fqbn ' + upload_arg + ' ' + file_path
 		fs.writeFile(file, data, (err) => {
 			if (err) return console.log(err)
-		});		
+		});
 		document.getElementById('local_debug').textContent += '\nVérification : en cours...\n'
 		exec(cmd , {cwd: './arduino'} , (error, stdout, stderr) => {
 			if (error) {
