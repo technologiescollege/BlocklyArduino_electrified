@@ -498,11 +498,11 @@ BlocklyDuino.bindFunctions = function() {
 			dialogRGB.dialog("open").dialog( "option", "buttons" );
 		};
 	});
-	
+	//mini menus version
 	$('#menu_24').on('click', function() {
-		$("#barre").prependTo("#content_arduino");
+		$("#barre_ide").prependTo("#content_arduino");
+		$("#barre_supervision").prependTo("#content_supervision");
 	});
-
 };
 
 /**
