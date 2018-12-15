@@ -3,3 +3,4 @@ arduino_data: ./
 board_manager:
   additional_urls:
     - http://arduino.esp8266.com/stable/package_esp8266com_index.json
+    - https://github.com/stm32duino/BoardManagerFiles/raw/master/STM32/package_stm_index.json

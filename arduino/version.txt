@@ -1,4 +1,4 @@
-arduino-cli-0.3.1-alpha.preview-windows
+arduino-cli-0.3.3-alpha.preview-windows
 	
 	arduino:avr:uno
     arduino:avr:pro:cpu=8MHzatmega168
