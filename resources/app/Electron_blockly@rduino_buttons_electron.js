@@ -46,7 +46,7 @@ menu_com.addEventListener('mouseover', function(event) {
 }, false)
 
 window.addEventListener('load', function load(event) {
-	document.getElementById('btn_saveConfigGlobale_id').onclick = function(event) {
+	document.getElementById('btn_saveConfigGlobale').onclick = function(event) {
 		var fileSettings = "./Blockly@rduino.json"
 		var Settings = window.location.search
 		fs.writeFileSync(fileSettings, JSON.stringify(window.location.search), (err) => {
@@ -55,6 +55,7 @@ window.addEventListener('load', function load(event) {
 			}                    
 			console.log("The file has been succesfully saved")
 		})
+		console.log(window.location.search)
 	}
 	document.getElementById('btn_term').onclick = function(event) {
 		var com = document.getElementById('serialport_ide').value
