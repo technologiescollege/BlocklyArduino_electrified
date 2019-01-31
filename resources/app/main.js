@@ -11,7 +11,7 @@ const fs = require('fs-extra')
 var fileSettings = "./Blockly@rduino.json"
 var Settings = ''
 
-if( !fs.existsSync(fileSettings) ) {
+if(!fs.existsSync(fileSettings)) {
 	console.log("File not found")
 	fs.writeFileSync(fileSettings, '', (err) => {
 		if(err){
@@ -19,14 +19,14 @@ if( !fs.existsSync(fileSettings) ) {
 		}                    
 		console.log("The file has been succesfully saved")
 	})
-	} else {
-		var Settings = fs.readFileSync(fileSettings, 'utf8', (err, Settings) => {
-			if(err){
-				console.log("An error occured reading the file :" + err.message)
-				return
-			}
-		// console.log("The file Settings is : " + Settings)
-		})
+} else {
+	var Settings = fs.readFileSync(fileSettings, 'utf8', (err, Settings) => {
+		if(err){
+			console.log("An error occured reading the file :" + err.message)
+			return
+		}
+	console.log("The file Settings is : " + Settings)
+	})
 }
 
 let mainWindow
@@ -46,33 +46,31 @@ function createWindow () {
 		width:1280,
 		height:800,
 		titleBarStyle: 'hidden',
+		thickFrame: true,
 		icon:'./favicon.ico',
 		"webPreferences":{
 			"webSecurity":false,
 			"allowRunningInsecureContent":true
 			}
 		})
-	if (Settings == '' || Settings == "undefined") {
-		if (process.platform == 'win32' && process.argv.length >= 2) {
-			if (((process.argv[1]).substring(0, 9)) == "index_AIO") {
+	if (process.platform == 'win32') {
+		if (process.argv.length >= 2) {
+			if (((process.argv[1]).substring(0, 9)) === "index_AIO") {
 				mainWindow.loadURL(path.join(__dirname, '../../www/' + process.argv[1]))
 			}
 			else {
 				mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html?' + process.argv[1]))
 			}
 		} else {
-			mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html'))
+				if (Settings == '' || Settings == "undefined") {		
+					mainWindow.loadURL(path.join(__dirname, '../../www/index_electron.html'))
+				}
+				else {
+					Settings = Settings.replace('"', '')
+					Settings = Settings.replace('"', '')
+					mainWindow.loadURL(path.join(__dirname, "../../www/index_electron.html" + Settings))				
+				}
 		}
-	} else {
-		Settings = Settings.replace('"', '')
-		Settings = Settings.replace('"', '')
-		mainWindow.loadURL(path.join(__dirname, "../../www/index_electron.html" + Settings))
-		// fs.writeFileSync("error-log.json", "../../www/index_electron.html" + Settings, (err) => {
-			// if(err){
-				// console.log("An error ocurred creating the file "+ err.message)
-			// }                    
-			// console.log("The file has been succesfully saved")
-		// })
 	}
 	mainWindow.setMenu(null);
 	// mainWindow.webContents.openDevTools();
