@@ -1,0 +1,8 @@
+Flask
+junit-xml
+MarkupSafe
+pexpect
+pyserial
+xunitmerge
+junit2html
+poster

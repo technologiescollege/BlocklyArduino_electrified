@@ -117,20 +117,28 @@ window.addEventListener('load', function load(event) {
 		var file_path = '.\\tmp'
 		var carte = document.getElementById('board_select').value
 		var com = document.getElementById('serialport_ide').value
-		if (carte=="none"||com=="no_com"){
+		if (carte=="none"){
 			document.getElementById('local_debug').style.color = '#ff0000'
-			document.getElementById('local_debug').textContent = 'Sélectionner un port !'
+			document.getElementById('local_debug').textContent = 'Sélectionner une carte !'
 			return
 			} else {
-				document.getElementById('local_debug').style.color = '#ffffff'
-				document.getElementById('local_debug').textContent = 'Carte ' + profile.defaultBoard['description'] + ' sur port ' + com
-				var upload_arg = profile.defaultBoard['upload_arg']
+				if (com=="no_com"){
+				document.getElementById('local_debug').style.color = '#ff0000'
+				document.getElementById('local_debug').textContent = 'Sélectionner un port !'
+				return
+				} else {
+					document.getElementById('local_debug').style.color = '#ffffff'
+					document.getElementById('local_debug').textContent = 'Carte ' + profile.defaultBoard['description'] + ' sur port ' + com
+					var upload_arg = profile.defaultBoard['upload_arg']
+				}
 		}
 		if ($('#detailedCompilation').prop('checked'))
 				var cmd = 'arduino-cli.exe --debug upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
 			else
 				var cmd = 'arduino-cli.exe upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
-		document.getElementById('local_debug').textContent = 'Téléversement : en cours...\n'
+		document.getElementById('local_debug').textContent = 'Carte ' + profile.defaultBoard['description'] + ' sur port ' + com
+		document.getElementById('local_debug').textContent += '\nTéléversement : en cours...\n'
+		console.log(cmd)
 		exec(cmd , {cwd: './arduino'} , (error, stdout, stderr) => {
 			if (error) {
 				document.getElementById('local_debug').style.color = '#ff0000'
