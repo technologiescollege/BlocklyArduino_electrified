@@ -21,38 +21,20 @@ window.addEventListener('load', function load(event) {
 			console.log("The file has been succesfully saved")
 		})
 	}
-	document.getElementById('btn_flash_pymata').onclick = function(event) {
-		$('#message').modal('show');
-		var com = 'COM' + fs.readFileSync('COMport.txt')
-		if ((com == "no_com")||(com === "")||(com === "0")){
-			document.getElementById('messageDIV').style.color = '#ff0000'
-			document.getElementById('messageDIV').textContent  = 'Sélectionner un port !'
-			return
-			} else {
-				document.getElementById('messageDIV').style.color = '#000000'
-				document.getElementById('messageDIV').textContent = 'Carte ' + profile.defaultBoard['description'] + ' sur port ' + com
-				var upload_arg = profile.defaultBoard['upload_arg']
-				var carte = document.getElementById('board_select').value
-				if (carte ==  'arduino_leonardo' || carte ==  'arduino_mega' || carte ==  'arduino_micro' || carte ==  'arduino_yun')
-						var file_path = '..\\..\\tools\\FirmataPlus-32u4'
-					else
-						var file_path = '..\\..\\tools\\FirmataPlus'
-		}
-		var cmd = 'arduino-cli.exe upload -p ' + com + ' --fqbn ' + upload_arg + ' ' + file_path
-		document.getElementById('messageDIV').textContent += '\n\nTéléversement : en cours...\n'
-		exec(cmd , {cwd: './B@electron/arduino'} , (error, stdout, stderr) => {
-			if (error) {
-				document.getElementById('messageDIV').style.color = '#ff0000'
-				document.getElementById('messageDIV').textContent = stderr
-				return
-			}
-			document.getElementById('messageDIV').style.color = '#00ff00'
-			document.getElementById('messageDIV').textContent += stdout
-			document.getElementById('messageDIV').textContent += '\nTéléversement du microprogramme : OK'
+	
+	document.getElementById('btn_validConfigGlobale').onclick = function(event) {
+		var carte = document.getElementById('board_select').value
+		var upload_arg = profile[carte]['upload_arg']
+		var fileSettings = "tools\\boardchoice.txt"
+		fs.writeFile(fileSettings, upload_arg, (err) => {
+			if(err){
+				console.log("An error ocurred creating the file "+ err.message)
+			}                    
+			console.log("The file has been succesfully saved")
 		})
 	}
 	document.getElementById('btn_term').onclick = function(event) {
-		var com = 'COM' + fs.readFileSync('COMport.txt')
+		var com = 'COM' + fs.readFileSync('tools\\COMport.txt')
 		if (com != "no_com") {
 			localStorage.setItem("com",com)
 			ipcRenderer.send("prompt", "")
@@ -110,7 +92,7 @@ window.addEventListener('load', function load(event) {
 	document.getElementById('btn_flash_local').onclick = function(event) {
 		var file_path = '.\\tmp'
 		var carte = document.getElementById('board_select').value
-		var com = 'COM' + fs.readFileSync('COMport.txt')
+		var com = 'COM' + fs.readFileSync('tools\\COMport.txt')
 		console.log("Asynchronous read2: " + com.toString())
 		if (carte=="none"){
 			document.getElementById('local_debug').style.color = '#ff0000'
