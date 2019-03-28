@@ -1,10 +1,4 @@
 [release]
-<<<<<<< HEAD
 version=3.1.28032019
 [update]
 date=28032019
-=======
-version=3.1.01032019
-[update]
-date=01032019
->>>>>>> bcd87b667d2e0af3b0495704457e0e8d55f7af71
