@@ -1,0 +1,29 @@
+{
+  "name": "Blockly@rduino",
+  "version": "1.0.0",
+  "description": "environnement de développement pour langage graphique",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --allow-file-access-from-files",
+    "install": "electron-rebuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/technologiescollege/BlocklyArduino_electrified"
+  },
+  "keywords": [
+    "blockly",
+    "arduino",
+    "electron"
+  ],
+  "author": "Sébastien CANET",
+  "license": "GNU General Public License v2.0",
+  "devDependencies": {
+    "electron": "^1.4.1",
+    "electron-rebuild": "^1.7.3"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "serialport": "^4.0.7"
+  }
+}
