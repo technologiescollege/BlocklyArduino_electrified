@@ -5,13 +5,12 @@
                The value read from the public channel is the current outside temperature at MathWorks headquaters in Natick, MA.  The value from the
                private channel is an example counter that increments every 10 seconds.
   
-  Hardware: ESP8266 based boards
+  Hardware: Arduino Uno WiFi Rev2
   
   !!! IMPORTANT - Modify the secrets.h file for this project with your network connection and ThingSpeak channel details. !!!
   
   Note:
-  - Requires ESP8266WiFi library and ESP8622 board add-on. See https://github.com/esp8266/Arduino for details.
-  - Select the target hardware from the Tools->Board menu
+  - Requires WiFiNINA library.
   - This example is written for a network using WPA encryption. For WEP or WPA, change the WiFi.begin() call accordingly.
   
   ThingSpeak ( https://www.thingspeak.com ) is an analytic IoT platform service that allows you to aggregate, visualize, and 
@@ -22,12 +21,12 @@
   
   For licensing information, see the accompanying license file.
   
-  Copyright 2018, The MathWorks, Inc.
+  Copyright 2019, The MathWorks, Inc.
 */
 
 #include "ThingSpeak.h"
+#include <WiFiNINA.h>
 #include "secrets.h"
-#include <ESP8266WiFi.h>
 
 char ssid[] = SECRET_SSID;   // your network SSID (name) 
 char pass[] = SECRET_PASS;   // your network password
@@ -46,8 +45,19 @@ unsigned int counterFieldNumber = 1;
 void setup() {
   Serial.begin(115200);  // Initialize serial
 
-  WiFi.mode(WIFI_STA); 
-  ThingSpeak.begin(client);  // Initialize ThingSpeak
+  // check for the WiFi module:
+  if (WiFi.status() == WL_NO_MODULE) {
+    Serial.println("Communication with WiFi module failed!");
+    // don't continue
+    while (true);
+  }
+
+  String fv = WiFi.firmwareVersion();
+  if (fv != "1.0.0") {
+    Serial.println("Please upgrade the firmware");
+  }
+    
+  ThingSpeak.begin(client);  //Initialize ThingSpeak
 }
 
 void loop() {
