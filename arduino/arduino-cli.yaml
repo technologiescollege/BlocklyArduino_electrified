@@ -1,7 +1,7 @@
 sketchbook_path: ../sketchbook
 arduino_data: ./
 libraries:
-    - ./libraries
+    - libraries
     - ../sketchbook/libraries
 board_manager:
   additional_urls:
