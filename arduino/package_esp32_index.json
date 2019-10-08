@@ -10,20 +10,23 @@
         {
           "category": "ESP32", 
           "name": "esp32", 
-          "url": "https://github.com/espressif/arduino-esp32/releases/download/1.0.2/esp32-1.0.2.zip", 
-          "checksum": "SHA-256:c3a5a5050705d41ab205d25a7399e921057b754ef8f883419f58c0c7f08df11c", 
+          "url": "https://github.com/espressif/arduino-esp32/releases/download/1.0.4/esp32-1.0.4.zip", 
+          "checksum": "SHA-256:d9108bf873933c4e48a3ca401fb51e41b2cc3f98d7c9b9be9881e7ca34bf0efe", 
           "help": {
             "online": ""
           }, 
-          "version": "1.0.2", 
+          "version": "1.0.4", 
           "architecture": "esp32", 
-          "archiveFileName": "esp32-1.0.2.zip", 
+          "archiveFileName": "esp32-1.0.4.zip", 
           "boards": [
             {
               "name": "ESP32 Dev Module"
             }, 
             {
               "name": "WEMOS LoLin32"
+            }, 
+            {
+              "name": "WEMOS D1 MINI ESP32"
             }
           ], 
           "toolsDependencies": [
@@ -43,18 +46,59 @@
               "name": "mkspiffs"
             }
           ], 
-          "size": "31174160"
+          "size": "36853332"
+        }, 
+        {
+          "category": "ESP32", 
+          "name": "esp32", 
+          "url": "https://github.com/espressif/arduino-esp32/releases/download/1.0.3/esp32-1.0.3.zip", 
+          "checksum": "SHA-256:19a30ece8a3ab26ab420c3d5531a9a1c51cb04e421a4f1d86dc072c209060436", 
+          "help": {
+            "online": ""
+          }, 
+          "version": "1.0.3", 
+          "architecture": "esp32", 
+          "archiveFileName": "esp32-1.0.3.zip", 
+          "boards": [
+            {
+              "name": "ESP32 Dev Module"
+            }, 
+            {
+              "name": "WEMOS LoLin32"
+            }, 
+            {
+              "name": "WEMOS D1 MINI ESP32"
+            }
+          ], 
+          "toolsDependencies": [
+            {
+              "packager": "esp32", 
+              "version": "1.22.0-80-g6c4433a-5.2.0", 
+              "name": "xtensa-esp32-elf-gcc"
+            }, 
+            {
+              "packager": "esp32", 
+              "version": "2.6.1", 
+              "name": "esptool_py"
+            }, 
+            {
+              "packager": "esp32", 
+              "version": "0.2.3", 
+              "name": "mkspiffs"
+            }
+          ], 
+          "size": "36811826"
         }, 
         {
           "category": "ESP32", 
           "help": {
             "online": ""
           }, 
-          "url": "https://github.com/espressif/arduino-esp32/releases/download/1.0.1/esp32-1.0.1.zip", 
-          "checksum": "SHA-256:1a7fa2f9bb0b6b5a20dfea227497f4851dc8b886caf7ecb998f745589c97ed34", 
-          "version": "1.0.1", 
+          "url": "https://github.com/espressif/arduino-esp32/releases/download/1.0.2/esp32-1.0.2.zip", 
+          "checksum": "SHA-256:c3a5a5050705d41ab205d25a7399e921057b754ef8f883419f58c0c7f08df11c", 
+          "version": "1.0.2", 
           "architecture": "esp32", 
-          "archiveFileName": "esp32-1.0.1.zip", 
+          "archiveFileName": "esp32-1.0.2.zip", 
           "boards": [
             {
               "name": "ESP32 Dev Module"
@@ -63,6 +107,37 @@
               "name": "WEMOS LoLin32"
             }
           ], 
+          "size": "31174160", 
+          "toolsDependencies": [
+            {
+              "packager": "esp32", 
+              "version": "1.22.0-80-g6c4433a-5.2.0", 
+              "name": "xtensa-esp32-elf-gcc"
+            }, 
+            {
+              "packager": "esp32", 
+              "version": "2.6.1", 
+              "name": "esptool_py"
+            }, 
+            {
+              "packager": "esp32", 
+              "version": "0.2.3", 
+              "name": "mkspiffs"
+            }
+          ], 
+          "name": "esp32"
+        }, 
+        {
+          "category": "ESP32", 
+          "help": {
+            "online": ""
+          }, 
+          "url": "https://github.com/espressif/arduino-esp32/releases/download/1.0.1/esp32-1.0.1.zip", 
+          "checksum": "SHA-256:1a7fa2f9bb0b6b5a20dfea227497f4851dc8b886caf7ecb998f745589c97ed34", 
+          "name": "esp32", 
+          "version": "1.0.1", 
+          "architecture": "esp32", 
+          "archiveFileName": "esp32-1.0.1.zip", 
           "size": "31273425", 
           "toolsDependencies": [
             {
@@ -81,7 +156,14 @@
               "name": "mkspiffs"
             }
           ], 
-          "name": "esp32"
+          "boards": [
+            {
+              "name": "ESP32 Dev Module"
+            }, 
+            {
+              "name": "WEMOS LoLin32"
+            }
+          ]
         }, 
         {
           "category": "ESP32", 
@@ -90,17 +172,10 @@
           }, 
           "url": "https://github.com/espressif/arduino-esp32/releases/download/1.0.0/esp32-1.0.0.zip", 
           "checksum": "SHA-256:94d586174f103e2014be590ab307c5cdda6fa2ec70204c7f121882ace5e05c80", 
+          "name": "esp32", 
           "version": "1.0.0", 
           "architecture": "esp32", 
           "archiveFileName": "esp32-1.0.0.zip", 
-          "boards": [
-            {
-              "name": "ESP32 Dev Module"
-            }, 
-            {
-              "name": "WEMOS LoLin32"
-            }
-          ], 
           "size": "26381887", 
           "toolsDependencies": [
             {
@@ -119,7 +194,14 @@
               "name": "mkspiffs"
             }
           ], 
-          "name": "esp32"
+          "boards": [
+            {
+              "name": "ESP32 Dev Module"
+            }, 
+            {
+              "name": "WEMOS LoLin32"
+            }
+          ]
         }
       ], 
       "tools": [
@@ -325,6 +407,13 @@
               "host": "i686-pc-linux-gnu", 
               "archiveFileName": "xtensa-esp32-elf-linux32-1.22.0-80-g6c4433a-5.2.0.tar.gz", 
               "size": "45566336"
+            }, 
+            {
+              "url": "https://dl.espressif.com/dl/xtensa-esp32-elf-linux-armel-1.22.0-87-gb57bad3-5.2.0.tar.gz", 
+              "checksum": "SHA-256:9c68c87bb23b1256dc0a1859b515946763e5292dcab4a4159a52fae5618ce861", 
+              "host": "arm-linux-gnueabihf", 
+              "archiveFileName": "xtensa-esp32-elf-linux-armel-1.22.0-87-gb57bad3-5.2.0.tar.gz", 
+              "size": "50655584"
             }
           ]
         }
