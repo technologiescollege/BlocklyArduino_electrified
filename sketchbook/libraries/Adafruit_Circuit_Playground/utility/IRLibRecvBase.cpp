@@ -15,8 +15,6 @@
  * interrupts is also in a separate folder IRLibFreq.
  */
 
-#if !defined(ARDUINO_NRF52840_CIRCUITPLAY)
-
 #include "IRLibRecvBase.h"
 #include "IRLibHardware.h"
 
@@ -210,6 +208,3 @@ void IRLib_doBlink(void) {
     }
   }
 }
-
-
-#endif //!defined(__NRF52__) 

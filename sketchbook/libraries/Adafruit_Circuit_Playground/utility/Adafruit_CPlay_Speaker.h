@@ -6,7 +6,8 @@
 
 #include <Arduino.h>
 
-#if !defined(__AVR__) // circuit playground express has nicer amp w/shutdown
+#ifdef __AVR__
+#else             // circuit playground express has nicer amp w/shutdown
   #define CPLAY_SPEAKER_SHUTDOWN 11 ///< shutdown pin (Express boards only)
 #endif
 
@@ -21,11 +22,10 @@ class Adafruit_CPlay_Speaker {
   void begin(void),
        end(void),
        set(uint8_t value),
-       playSound(const uint8_t *data, uint32_t length, uint16_t sampleRate,
-         bool tenBit=false),
+       playSound(const uint8_t *data, uint32_t length, uint16_t sampleRate, boolean tenBit=false),
        say(const uint8_t *addr);
 
-  void enable(bool e);
+  void enable(boolean e);
 
   /**************************************************************************/
   /*! 
@@ -44,7 +44,7 @@ class Adafruit_CPlay_Speaker {
   void on(void) { enable(true); };
 
  private:
-  bool started;
+  boolean started;
 };
 
 #endif // ADAFRUIT_CPLAY_SPEAKER_H

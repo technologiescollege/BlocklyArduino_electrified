@@ -22,7 +22,6 @@ void setup() {
   Serial.begin(115200);
   // Initialize Circuit Playground library.
   CircuitPlayground.begin();
-  CircuitPlayground.strip.setBrightness(255);
 }
 
 void loop() {

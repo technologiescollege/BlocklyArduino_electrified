@@ -7,9 +7,6 @@
  * of these classes, rather you will use them as base classes in creating derived
  * protocol specific decoders.
  */
-
-#if !defined(ARDUINO_NRF52840_CIRCUITPLAY)
-
 #include "IRLibDecodeBase.h"
 #include "IRLibHardware.h"
 
@@ -183,5 +180,3 @@ IRdecodeRC::RCLevel IRdecodeRC::getRClevel(uint8_t *used, const uint16_t t1) {
   }
   return val;   
 }
-
-#endif //!defined(__NRF52) 

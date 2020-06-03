@@ -10,7 +10,7 @@ daemon:
 directories:
   data: ./
   downloads: ./suppr
-  user: ./
+  user: ../sketchbook
 logging:
   file: ""
   format: text
