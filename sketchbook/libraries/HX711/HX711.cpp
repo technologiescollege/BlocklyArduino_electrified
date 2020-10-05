@@ -1,147 +1,134 @@
-//
-//    FILE: HX711.cpp
-//  AUTHOR: Rob Tillaart
-// PURPOSE: Library for Loadcells for UNO
-// VERSION: 0.2.0
-// HISTORY:
-// 0.1.0    2019-09-04 initial release
-// 0.1.1    2019-09-09 change long to float (reduce footprint)
-// 0.2.0    2020-06-15 refactor; add price functions;
+#include <Arduino.h>
+#include <HX711.h>
 
-#include "HX711.h"
+#if ARDUINO_VERSION <= 106
+    // "yield" is not implemented as noop in older Arduino Core releases, so let's define it.
+    // See also: https://stackoverflow.com/questions/34497758/what-is-the-secret-of-the-arduino-yieldfunction/34498165#34498165
+    void yield(void) {};
+#endif
 
-HX711::HX711()
-{
-  reset();
+HX711::HX711(byte dout, byte pd_sck, byte gain) {
+	begin(dout, pd_sck, gain);
 }
 
-HX711::~HX711() {}
-
-void HX711::begin(uint8_t dataPin, uint8_t clockPin)
-{
-  _dataPin = dataPin;
-  _clockPin = clockPin;
-
-  pinMode(_dataPin, INPUT);
-  pinMode(_clockPin, OUTPUT);
-  digitalWrite(_clockPin, LOW);
-
-  reset();
+HX711::HX711() {
 }
 
-void HX711::reset()
-{
-  _offset = 0;
-  _scale = 1;
-  _gain = 128;
+HX711::~HX711() {
 }
 
-bool HX711::is_ready()
-{
-  return digitalRead(_dataPin) == LOW;
+void HX711::begin(byte dout, byte pd_sck, byte gain) {
+	PD_SCK = pd_sck;
+	DOUT = dout;
+
+	pinMode(PD_SCK, OUTPUT);
+	pinMode(DOUT, INPUT);
+
+	set_gain(gain);
 }
 
-float HX711::read() 
-{
-  // this waiting takes most time...
-  while (digitalRead(_dataPin) == HIGH) yield();
-  
-  union
-  {
-    long value = 0;
-    uint8_t data[4];
-  } v;
-
-  noInterrupts();
-
-  // Pulse the clock pin 24 times to read the data.
-  v.data[2] = shiftIn(_dataPin, _clockPin, MSBFIRST);
-  v.data[1] = shiftIn(_dataPin, _clockPin, MSBFIRST);
-  v.data[0] = shiftIn(_dataPin, _clockPin, MSBFIRST);
-
-  // TABLE 3 page 4 datasheet
-  // only default verified, so other values not supported yet
-  uint8_t m = 1;   // default gain == 128
-  if (_gain == 64) m = 3;
-  if (_gain == 32) m = 2;
-
-  while (m > 0)
-  {
-    digitalWrite(_clockPin, HIGH);
-    digitalWrite(_clockPin, LOW);
-    m--;
-  }
-
-  interrupts();
-
-  // SIGN extend
-  if (v.data[2] & 0x80) v.data[3] = 0xFF;
-
-  _lastRead = millis();
-  return 1.0 * v.value;
+bool HX711::is_ready() {
+	return digitalRead(DOUT) == LOW;
 }
 
-// assumes tare() has been set.
-void HX711::callibrate_scale(uint16_t weight, uint8_t times)
-{
-  _scale = (1.0 * weight) / (read_average(times) - _offset);
+void HX711::set_gain(byte gain) {
+	switch (gain) {
+		case 128:		// channel A, gain factor 128
+			GAIN = 1;
+			break;
+		case 64:		// channel A, gain factor 64
+			GAIN = 3;
+			break;
+		case 32:		// channel B, gain factor 32
+			GAIN = 2;
+			break;
+	}
+
+	digitalWrite(PD_SCK, LOW);
+	read();
 }
 
-void HX711::wait_ready(uint32_t ms) 
-{
-  while (!is_ready())
-  {
-    delay(ms);
-  }
+long HX711::read() {
+	// wait for the chip to become ready
+	while (!is_ready()) {
+		// Will do nothing on Arduino but prevent resets of ESP8266 (Watchdog Issue)
+		yield();
+	}
+
+	unsigned long value = 0;
+	uint8_t data[3] = { 0 };
+	uint8_t filler = 0x00;
+
+	// pulse the clock pin 24 times to read the data
+	data[2] = shiftIn(DOUT, PD_SCK, MSBFIRST);
+	data[1] = shiftIn(DOUT, PD_SCK, MSBFIRST);
+	data[0] = shiftIn(DOUT, PD_SCK, MSBFIRST);
+
+	// set the channel and the gain factor for the next reading using the clock pin
+	for (unsigned int i = 0; i < GAIN; i++) {
+		digitalWrite(PD_SCK, HIGH);
+		digitalWrite(PD_SCK, LOW);
+	}
+
+	// Replicate the most significant bit to pad out a 32-bit signed integer
+	if (data[2] & 0x80) {
+		filler = 0xFF;
+	} else {
+		filler = 0x00;
+	}
+
+	// Construct a 32-bit signed integer
+	value = ( static_cast<unsigned long>(filler) << 24
+			| static_cast<unsigned long>(data[2]) << 16
+			| static_cast<unsigned long>(data[1]) << 8
+			| static_cast<unsigned long>(data[0]) );
+
+	return static_cast<long>(value);
 }
 
-bool HX711::wait_ready_retry(uint8_t retries, uint32_t ms) 
-{
-  while (retries--)
-  {
-    if (is_ready()) return true;
-    delay(ms);
-  }
-  return false;
+long HX711::read_average(byte times) {
+	long sum = 0;
+	for (byte i = 0; i < times; i++) {
+		sum += read();
+		yield();
+	}
+	return sum / times;
 }
 
-bool HX711::wait_ready_timeout(uint32_t timeout, uint32_t ms)
-{
-  uint32_t start = millis();
-  while (millis() - start < timeout) 
-  {
-    if (is_ready()) return true;
-    delay(ms);
-  }
-  return false;
+double HX711::get_value(byte times) {
+	return read_average(times) - OFFSET;
 }
 
-float HX711::read_average(uint8_t times) 
-{
-  float sum = 0;
-  for (uint8_t i = 0; i < times; i++) 
-  {
-    sum += read();
-    yield();
-  }
-  return sum / times;
+float HX711::get_units(byte times) {
+	return get_value(times) / SCALE;
 }
 
-float HX711::get_units(uint8_t times)
-{
-  float units = get_value(times) * _scale;
-  return units;
-};
-
-void HX711::power_down() 
-{
-  digitalWrite(_clockPin, LOW);
-  digitalWrite(_clockPin, HIGH);
+void HX711::tare(byte times) {
+	double sum = read_average(times);
+	set_offset(sum);
 }
 
-void HX711::power_up() 
-{
-  digitalWrite(_clockPin, LOW);
+void HX711::set_scale(float scale) {
+	SCALE = scale;
 }
 
-// -- END OF FILE --
+float HX711::get_scale() {
+	return SCALE;
+}
+
+void HX711::set_offset(long offset) {
+	OFFSET = offset;
+}
+
+long HX711::get_offset() {
+	return OFFSET;
+}
+
+void HX711::power_down() {
+	digitalWrite(PD_SCK, LOW);
+	digitalWrite(PD_SCK, HIGH);
+}
+
+void HX711::power_up() {
+	digitalWrite(PD_SCK, LOW);
+}

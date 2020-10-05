@@ -119,16 +119,20 @@ public:
 // echo | openssl s_client -connect io.adafruit.com:443 | openssl x509
 // -fingerprint -noout
 #define AIO_SSL_FINGERPRINT                                                    \
-  "77 00 54 2D DA E7 D8 03 27 31 23 99 EB 27 DB CB A5 4C 57 18" ///< Latest
+  "59 3C 48 0A B1 8B 39 4E 0D 58 50 47 9A 13 55 60 CC A0 1D AF" ///< Latest
                                                                 ///< Adafruit IO
                                                                 ///< SSL
                                                                 ///< Fingerprint
 
-#define AIO_FEED_NAME_LENGTH 20 ///< Maximum length of an Adafruit IO Feed name
+#define AIO_FEED_NAME_LENGTH                                                   \
+  258 ///< Maximum length of an Adafruit IO Feed    \
+                                  ///< Name; 128 + 1 + 128 for the group, a dot \
+                                  ///< , and actual feed name.
 #define AIO_DATA_LENGTH                                                        \
   45 ///< Maximum length of data sent/recieved from Adafruit IO
 #define AIO_CSV_LENGTH                                                         \
-  150 ///< Maximum comma-separated-value length from Adafruit IO
+  AIO_FEED_NAME_LENGTH + 4 ///< Maximum comma-separated-value length from \
+                           ///< Adafruit IO
 
 /** aio_status_t offers 13 status states */
 typedef enum {
