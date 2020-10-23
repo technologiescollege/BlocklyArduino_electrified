@@ -1,24 +1,57 @@
 #######################################
-# Syntax Coloring Map for parsing
+# Syntax Coloring Map MyName
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-
 Parser	KEYWORD1
+ParserCallback	KEYWORD1
+ParserCallbackBool	KEYWORD1
+ParserCallbackChar	KEYWORD1
+ParserCallbackByte	KEYWORD1
+ParserCallbackUint8	KEYWORD1
+ParserCallbackUint16	KEYWORD1
+ParserCallbackUint32	KEYWORD1
+ParserCallbackInt8	KEYWORD1
+ParserCallbackInt16	KEYWORD1
+ParserCallbackInt32	KEYWORD1
+ParserCallbackFloat	KEYWORD1
+ParserCallbackCharArray	KEYWORD1
+ParserCallbackString	KEYWORD1
+ParserCondition	KEYWORD1
+ParserCriterion	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-
-readStream	KEYWORD2
-getName		KEYWORD2
-getValue	KEYWORD2
-parsing		KEYWORD2
-free		KEYWORD2
+Read_Bool	KEYWORD2
+Read_Char	KEYWORD2
+Read_Byte	KEYWORD2
+Read_Int8	KEYWORD2
+Read_Int16	KEYWORD2
+Read_Int32	KEYWORD2
+Read_Uint8	KEYWORD2
+Read_Uint16	KEYWORD2
+Read_Uint32	KEYWORD2
+float	KEYWORD2
+Read_Float	KEYWORD2
+Read_UnsignedFloat	KEYWORD2
+Read_CharArray	KEYWORD2
+Read_String	KEYWORD2
+Compare	KEYWORD2
+Search	KEYWORD2
+IfCurrentIs	KEYWORD2
+IfCurrentIsNot	KEYWORD2
+DoUntil	KEYWORD2
+DoWhile	KEYWORD2
+Skip	KEYWORD2
+SkipWhile	KEYWORD2
+SkipUntil	KEYWORD2
+Jump	KEYWORD2
+JumpAfter	KEYWORD2
+JumpTo	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
-
