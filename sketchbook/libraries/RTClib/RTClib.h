@@ -94,7 +94,7 @@ public:
       @brief  Return the year.
       @return Year (range: 2000--2099).
   */
-  uint16_t year() const { return 2000 + yOff; }
+  uint16_t year() const { return 2000U + yOff; }
   /*!
       @brief  Return the month.
       @return Month number (1--12).
@@ -287,7 +287,7 @@ public:
 
 /** DS3231 SQW pin mode settings */
 enum Ds3231SqwPinMode {
-  DS3231_OFF = 0x01,            /**< Off */
+  DS3231_OFF = 0x1C,            /**< Off */
   DS3231_SquareWave1Hz = 0x00,  /**<  1Hz square wave */
   DS3231_SquareWave1kHz = 0x08, /**<  1kHz square wave */
   DS3231_SquareWave4kHz = 0x10, /**<  4kHz square wave */
