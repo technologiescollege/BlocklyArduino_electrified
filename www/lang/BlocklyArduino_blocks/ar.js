@@ -162,6 +162,8 @@ Blockly.Msg.CAT_GROVE_COMM =  "- إتصال";
 Blockly.Msg.CAT_GROVE_BEGINNER_KIT = "Grove Beginner Kit";  //added september 10th 2020
 Blockly.Msg.CAT_GROVE_BEGINNER_KIT_IN = Blockly.Msg.CAT_GROVE_IN;  //added september 10th 2020
 Blockly.Msg.CAT_GROVE_BEGINNER_KIT_OUT = Blockly.Msg.CAT_GROVE_OUT;  //added september 10th 2020
+Blockly.Msg.CAT_GROVE_MINI_LiDAR = "> mini LIDAR";  //added february 11th 2021
+Blockly.Msg.CAT_GROVE_VL53L0X = "> distance 'Time of Flight' VL53L0X";  //added february 13th 2021
 
 Blockly.Msg.CAT_TECHNOZONE =  "TechnoZone51";
 Blockly.Msg.CAT_TECHNOZONE_IN =  "- أجهزة الاستشعار";
@@ -380,6 +382,7 @@ Blockly.Msg.CAT_FONCTION_STOCKAGE_EEPROM =  "EEPROM";
 Blockly.Msg.CAT_FONCTION_STOCKAGE_SDCARD =  "بطاقة SD";
 
 Blockly.Msg.CAT_CAPACITIVESENSOR =  "كشف بالسعة" ;
+Blockly.Msg.CAT_PULSESENSOR = "Pulse Sensor"; //added 14/02/2021
 
 Blockly.Msg.CAT_ESP8266 =  "ESP8266 IoT";
 Blockly.Msg.CAT_esp8266_wifi =  "- واي فاي" ;
@@ -413,6 +416,7 @@ Blockly.Msg.STEPPER_COMPONENT =  'محرك خطوة بخطوة' ;
 Blockly.Msg.NEOPIXEL_COMPONENT =  'Neopixel';
 Blockly.Msg.SERVO_COMPONENT =  '(سيرفو) محرك مؤازر';
 Blockly.Msg.SERVO_DEFAULT_NAME =  "SERVO";
+Blockly.Msg.LIDAR_DEFAULT_NAME = 'LiDAR';
 Blockly.Msg.SHARP_IR_COMPONENT =  "Sharp IR rangefinder";
 
 //**********************************blocks***********************************************
@@ -2763,3 +2767,32 @@ Blockly.Msg.GROVE_BK_INOUT_PRESSURE_TOOLTIP = 'get back value of temperature and
 Blockly.Msg.GROVE_BK_INOUT_GYRO_TEXT1 = 'acceleration';
 Blockly.Msg.GROVE_BK_INOUT_GYRO_TEXT2 = 'axis';
 Blockly.Msg.GROVE_BK_INOUT_GYRO_TOOLTIP = "get back acceleration value from sensor, in 3 dimensions";
+
+//******** mini LiDAR Grove 11/02/2021
+Blockly.Msg.grove_TF_Mini_LiDAR_MISC_HELPURL = "https://wiki.seeedstudio.com/Grove-TF_Mini_LiDAR/";
+Blockly.Msg.grove_TF_Mini_LiDAR_ATTACH1 = "attach laser LiDAR";
+Blockly.Msg.grove_TF_Mini_LiDAR_ATTACH2 = "with name";
+Blockly.Msg.grove_TF_Mini_LiDAR_INPUT1 = "on pin (yellow wire)";
+Blockly.Msg.grove_TF_Mini_LiDAR_INPUT2 = "on pin (white wire)";
+Blockly.Msg.grove_TF_Mini_LiDAR_attach_TOOLTIP = "define pin connected to the LiDAR and use instance name";
+Blockly.Msg.grove_TF_Mini_LiDAR_distance_TITLE = "distance value";
+Blockly.Msg.grove_TF_Mini_LiDAR_distance_TOOLTIP = "send back distance value, must be between 30cm and 2 m";
+Blockly.Msg.grove_TF_Mini_LiDAR_strength_TITLE = "signal strenght";
+Blockly.Msg.grove_TF_Mini_LiDAR_strength_TOOLTIP = "send back signal strenght to qualify quality";
+Blockly.Msg.grove_TF_Mini_LiDAR_chip_temp_TITLE = "sensor internal temperature";
+Blockly.Msg.grove_TF_Mini_LiDAR_chip_temp_TOOLTIP = "send back signal internal temperature of the microcontroller on sensor";
+
+//******** Grove Time of Flight Distance Sensor VL53L0X 13/02/2021
+Blockly.Msg.grove_VL53L0X_MISC_HELPURL = "https://wiki.seeedstudio.com/Grove-Time_of_Flight_Distance_Sensor-VL53L0X/";
+Blockly.Msg.grove_VL53L0X_test_TITLE = "sensor test";
+Blockly.Msg.grove_VL53L0X_test_TOOLTIP = "use serial connection to send back message";
+Blockly.Msg.grove_VL53L0X_start_and_report_TITLE = "distance mesured (in mm)";
+Blockly.Msg.grove_VL53L0X_start_and_report_TOOLTIP = "send back distance value, in mm. /!\ Recommed measure distance 30mm-1000mm /!\ ";
+Blockly.Msg.grove_VL53L0X_stop_measure_TITLE = "stop continuous mesure mode";
+Blockly.Msg.grove_VL53L0X_stop_measure_TOOLTIP = "if the stop request occurs during a range measurement, then the measurement is completed before stopping.";
+
+//******** Pulse Sensor 14/02/2021
+Blockly.Msg.pulseSensor_HELPURL = "https://github.com/WorldFamousElectronics/PulseSensorPlayground";
+Blockly.Msg.pulseSensor_TEXT1 = "value image";
+Blockly.Msg.pulseSensor_TEXT2 = "of pulse detected on port A";
+Blockly.Msg.pulseSensor_TOOLTIP = "analog value [0~1024] measured, set a threshold to define when there is a pulse";

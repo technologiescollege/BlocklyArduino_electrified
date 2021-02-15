@@ -164,8 +164,10 @@ Blockly.Msg.CAT_GROVE_LCD = " - écrans LCD";
 Blockly.Msg.CAT_GROVE_LCD2 = " Ecrans LCD";
 Blockly.Msg.CAT_GROVE_COMM = " - communication";
 Blockly.Msg.CAT_GROVE_BEGINNER_KIT = "Grove Beginner Kit";  //added september 10th 2020
-Blockly.Msg.CAT_GROVE_BEGINNER_KIT_IN = Blockly.Msg.CAT_GROVE_IN;  //added september 10th 2020
+Blockly.Msg.CAT_GROVE_BEGINNER_KIT_IN = Blockly.Msg.CAT_GROVE_IN;  //added september 10th 
 Blockly.Msg.CAT_GROVE_BEGINNER_KIT_OUT = Blockly.Msg.CAT_GROVE_OUT;  //added september 10th 2020
+Blockly.Msg.CAT_GROVE_MINI_LiDAR = "> mini LIDAR";  //added february 11th 2021
+Blockly.Msg.CAT_GROVE_VL53L0X = "> distance 'Time of Flight' VL53L0X";  //added february 13th 2021
 
 Blockly.Msg.CAT_TECHNOZONE = "TechnoZone51";  //added march 11th 2015
 Blockly.Msg.CAT_TECHNOZONE_IN = " - capteurs";
@@ -382,6 +384,7 @@ Blockly.Msg.CAT_FONCTION_STOCKAGE_EEPROM = "EEPROM";
 Blockly.Msg.CAT_FONCTION_STOCKAGE_SDCARD = "Carte SD";
 
 Blockly.Msg.CAT_CAPACITIVESENSOR = "détection capacitive";
+Blockly.Msg.CAT_PULSESENSOR = "pulsations cardiaques"; //added 14/02/2021
  
 Blockly.Msg.CAT_ESP8266="ESP8266 IdO";
 Blockly.Msg.CAT_esp8266_wifi=" - WiFi";
@@ -440,6 +443,7 @@ Blockly.Msg.STEPPER_COMPONENT = 'stepper';
 Blockly.Msg.NEOPIXEL_COMPONENT = 'Neopixel';
 Blockly.Msg.SERVO_COMPONENT = 'servomoteur';
 Blockly.Msg.SERVO_DEFAULT_NAME = "SERVO";
+Blockly.Msg.LIDAR_DEFAULT_NAME = 'LiDAR';
 Blockly.Msg.SHARP_IR_COMPONENT = 'télémètre';
 
 //**********************************blocks***********************************************
@@ -3034,3 +3038,32 @@ Blockly.Msg.STENDHAL_STEPPER_STEP2 = "de";
 Blockly.Msg.STENDHAL_STEPPER_STEP3 = "pas dans le sens horaire.";
 Blockly.Msg.STENDHAL_STEPPER_TOOLTIP = "Réglage par défaut pour le modèle 24BYJ48. La vitesse est réglable de 1 à 9 tr/min. Le nombre de pas par tour est 3072";
 Blockly.Msg.STENDHAL_STEPPER_HELPURL = "http://www.arduino.cc/en/Reference/StepperConstructor";
+
+//******** mini LiDAR Grove 11/02/2021
+Blockly.Msg.grove_TF_Mini_LiDAR_MISC_HELPURL = "https://wiki.seeedstudio.com/Grove-TF_Mini_LiDAR/";
+Blockly.Msg.grove_TF_Mini_LiDAR_ATTACH1 = "attacher un télémètre laser";
+Blockly.Msg.grove_TF_Mini_LiDAR_ATTACH2 = "avec l'identifiant";
+Blockly.Msg.grove_TF_Mini_LiDAR_INPUT1 = "sur la broche (fil jaune)";
+Blockly.Msg.grove_TF_Mini_LiDAR_INPUT2 = "sur la broche (fil blanc)";
+Blockly.Msg.grove_TF_Mini_LiDAR_attach_TOOLTIP = "definir les broches du LiDAR pour utiliser le nom de l'objet";
+Blockly.Msg.grove_TF_Mini_LiDAR_distance_TITLE = "valeur de la distance";
+Blockly.Msg.grove_TF_Mini_LiDAR_distance_TOOLTIP = "la distance doit être comprise entre 30cm et 2 m";
+Blockly.Msg.grove_TF_Mini_LiDAR_strength_TITLE = "force du signal";
+Blockly.Msg.grove_TF_Mini_LiDAR_strength_TOOLTIP = "renvoie une valeur déterminant la qualité de l'information";
+Blockly.Msg.grove_TF_Mini_LiDAR_chip_temp_TITLE = "température interne du capteur";
+Blockly.Msg.grove_TF_Mini_LiDAR_chip_temp_TOOLTIP = "renvoie la température interne du micrcontrôleur du capteur";
+
+//******** Grove Time of Flight Distance Sensor VL53L0X 13/02/2021
+Blockly.Msg.grove_VL53L0X_MISC_HELPURL = "https://wiki.seeedstudio.com/Grove-Time_of_Flight_Distance_Sensor-VL53L0X/";
+Blockly.Msg.grove_VL53L0X_test_TITLE = "test si le capteur renvoie des données";
+Blockly.Msg.grove_VL53L0X_test_TOOLTIP = "la connexion série est établie et un message est renvoyé";
+Blockly.Msg.grove_VL53L0X_start_and_report_TITLE = "distance mesurée (en mm)";
+Blockly.Msg.grove_VL53L0X_start_and_report_TOOLTIP = "renvoie la valeur mesurée par le capteur, en mm.\n /!\\ ne pas dépasser 2m, préférer un intervalle entre 30 & 10000 mm /!\\ ";
+Blockly.Msg.grove_VL53L0X_stop_measure_TITLE = "stoppe les mesures en continu";
+Blockly.Msg.grove_VL53L0X_stop_measure_TOOLTIP = "stoppe le mode continu de mesure";
+
+//******** Pulse Sensor 14/02/2021
+Blockly.Msg.pulseSensor_HELPURL = "https://github.com/WorldFamousElectronics/PulseSensorPlayground";
+Blockly.Msg.pulseSensor_TEXT1 = "valeur image";
+Blockly.Msg.pulseSensor_TEXT2 = "des pulsations captées sur la broche analogique A";
+Blockly.Msg.pulseSensor_TOOLTIP = "valeur analogique [0~1024] mesurée, penser à définir\nun seuil en dessous duquel ce n'est pas un battement";
