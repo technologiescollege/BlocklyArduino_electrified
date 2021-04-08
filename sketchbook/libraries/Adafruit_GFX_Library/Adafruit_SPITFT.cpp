@@ -560,7 +560,7 @@ void Adafruit_SPITFT::initSPI(uint32_t freq, uint8_t spiMode) {
     if (
 #if !defined(SPI_INTERFACES_COUNT)
         1
-#endif
+#else
 #if SPI_INTERFACES_COUNT > 0
         (hwspi._spi == &SPI)
 #endif
@@ -579,6 +579,7 @@ void Adafruit_SPITFT::initSPI(uint32_t freq, uint8_t spiMode) {
 #if SPI_INTERFACES_COUNT > 5
         || (hwspi._spi == &SPI5)
 #endif
+#endif // end SPI_INTERFACES_COUNT
     ) {
       hwspi._spi->begin();
     }
@@ -1984,6 +1985,7 @@ uint16_t Adafruit_SPITFT::readcommand16(uint16_t addr) {
   }
   return result;
 #else
+  (void)addr; // disable -Wunused-parameter warning
   return 0;
 #endif // end !USE_FAST_PINIO
 }
@@ -2171,6 +2173,8 @@ void Adafruit_SPITFT::write16(uint16_t w) {
 #if defined(USE_FAST_PINIO)
     if (tft8.wide)
       *(volatile uint16_t *)tft8.writePort = w;
+#else
+    (void)w; // disable -Wunused-parameter warning
 #endif
     TFT_WR_STROBE();
   }

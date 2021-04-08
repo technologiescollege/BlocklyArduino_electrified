@@ -1,7 +1,38 @@
+ /*
+ * sam.cpp
+ *
+ *  Contains functions for Atmels SAMD CPU's
+ *
+ *  This file is part of Arduino-IRremote https://github.com/z3t0/Arduino-IRremote.
+ *
+ *************************************************************************************
+ * MIT License
+ *
+ * Copyright (c) 2020-2021 Rafi Khan, Armin Joachimsmeyer
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished
+ * to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ ************************************************************************************
+ */
 #if defined(ARDUINO_ARCH_SAMD)
 // Support routines for SAM processor boards
 
-#include "IRremote.h"
+#include "IRremoteInt.h"
 
 // "Idiot check"
 #ifdef USE_DEFAULT_ENABLE_IR_IN
@@ -14,8 +45,8 @@
 
 // following based on setup from GitHub jdneo/timerInterrupt.ino
 
-static void setTimerFrequency(int frequencyHz) {
-    int compareValue = (SYSCLOCK / (TIMER_PRESCALER_DIV * frequencyHz)) - 1;
+static void setTimerFrequency(unsigned int aFrequencyHz) {
+    int compareValue = (SYSCLOCK / (TIMER_PRESCALER_DIV * aFrequencyHz)) - 1;
     //Serial.println(compareValue);
     TcCount16* TC = (TcCount16*) TC3;
     // Make sure the count is in a proportional position to where it was
@@ -74,8 +105,7 @@ void IRrecv::enableIRIn() {
     //Serial.println("Started timer");
 
     // Initialize state machine variables
-    irparams.rcvstate = IR_REC_STATE_IDLE;
-    irparams.rawlen = 0;
+    resume();
 
     // Set pin modes
     pinMode(irparams.recvpin, INPUT);
@@ -85,7 +115,7 @@ void IRrecv::disableIRIn() {
     TC3->COUNT16.CTRLA.reg &= ~TC_CTRLA_ENABLE;
 }
 
-void IRTimer(); // Defined in IRRemote as ISR(TIMER_INTR_NAME)
+void IRTimer(); // Defined in IRremoteBoardDefs.h as ISR(TIMER_INTR_NAME)
 
 void TC3_Handler(void) {
     TcCount16* TC = (TcCount16*) TC3;

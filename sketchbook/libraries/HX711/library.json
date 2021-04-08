@@ -1,21 +1,17 @@
 {
-  "name": "HX711",
-  "keywords": "load cell library kilo pound gram price ",
-  "description": "Arduino library for HX711 loadcell amplifier",
-  "authors":
-  [
-    {
-      "name": "Rob Tillaart",
-      "email": "Rob.Tillaart@gmail.com",
-      "maintainer": true
-    }
-  ],
-  "repository":
-  {
-    "type": "git",
-    "url": "https://github.com/RobTillaart/HX711"
-  },
-  "version":"0.2.0",
-  "frameworks": "arduino",
-  "platforms": "*"
+    "name": "HX711",
+    "keywords": "hx711, scale, weight",
+    "description": "An Arduino library to interface the Avia Semiconductor HX711 24-Bit Analog-to-Digital Converter (ADC) for Weight Scales.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bogde/HX711.git"
+    },
+    "version": "0.1",
+    "exclude": "tests",
+    "examples": "examples/*/*.ino",
+    "frameworks": "arduino",
+    "platforms": [
+        "atmelavr",
+        "espressif"
+    ]
 }

@@ -1,98 +1,77 @@
-#pragma once
-//
-//    FILE: HX711.h
-//  AUTHOR: Rob Tillaart
-// VERSION: 0.2.0
-// PURPOSE: Library for Loadcells for UNO
-//     URL: https://github.com/RobTillaart/HX711
-//
-// HISTORY: see HX711.cpp
-//
-// NOTES
-// Superset of interface of HX711 class of Bogde
-// float iso long as float has 23 bits mantisse.
+#ifndef HX711_h
+#define HX711_h
 
+#if ARDUINO >= 100
 #include "Arduino.h"
-
-#define HX711_LIB_VERSION  "0.2.0"
+#else
+#include "WProgram.h"
+#endif
 
 class HX711
 {
-public:
-  HX711();
-  ~HX711();
+	private:
+		byte PD_SCK;	// Power Down and Serial Clock Input Pin
+		byte DOUT;		// Serial Data Output Pin
+		byte GAIN;		// amplification factor
+		long OFFSET = 0;	// used for tare weight
+		float SCALE = 1;	// used to return weight in grams, kg, ounces, whatever
 
-  // fixed gain 128 for now
-  void begin(uint8_t dataPin, uint8_t clockPin);
+	public:
+		// define clock and data pin, channel, and gain factor
+		// channel selection is made by passing the appropriate gain: 128 or 64 for channel A, 32 for channel B
+		// gain: 128 or 64 for channel A; channel B works with 32 gain factor only
+		HX711(byte dout, byte pd_sck, byte gain = 128);
 
-  void reset();
+		HX711();
 
-  // checks if loadcell is ready to read.
-  bool is_ready();
-  
-  // wait until ready, 
-  // check every ms
-  void wait_ready(uint32_t ms = 0);
-  // max # retries
-  bool wait_ready_retry(uint8_t retries = 3, uint32_t ms = 0);
-  // max timeout
-  bool wait_ready_timeout(uint32_t timeout = 1000, uint32_t ms = 0);
+		virtual ~HX711();
 
-  // raw read
-  float read();
-  // multiple raw reads
-  float read_average(uint8_t times = 10);
-  // corrected for offset
-  float get_value(uint8_t times = 1) { return read_average(times) - _offset; };
-  // converted to proper units.
-  float get_units(uint8_t times = 1);
+		// Allows to set the pins and gain later than in the constructor
+		void begin(byte dout, byte pd_sck, byte gain = 128);
 
-  // TARE
-  // call tare to calibrate zero
-  void tare(uint8_t times = 10)      { _offset = read_average(times); };
-  float get_tare()                   { return -_offset * _scale; };
-  bool tare_set()                    { return _offset == 0; };
+		// check if HX711 is ready
+		// from the datasheet: When output data is not ready for retrieval, digital output pin DOUT is high. Serial clock
+		// input PD_SCK should be low. When DOUT goes to low, it indicates data is ready for retrieval.
+		bool is_ready();
 
-  // CORE "CONSTANTS" -> read datasheet
-  // GAIN values: 128, 64 32  [only 128 tested & verified]
-  void set_gain(uint8_t gain = 128)  { _gain = gain; };
-  uint8_t get_gain()                 { return _gain; };
-  // SCALE > 0
-  void set_scale(float scale = 1.0)  { _scale = 1 / scale; };
-  float get_scale()                  { return 1 / _scale; };
-  // OFFSET > 0
-  void set_offset(long offset = 0)   { _offset = offset; };
-  long get_offset()                  { return _offset; };
+		// set the gain factor; takes effect only after a call to read()
+		// channel A can be set for a 128 or 64 gain; channel B has a fixed 32 gain
+		// depending on the parameter, the channel is also set to either A or B
+		void set_gain(byte gain = 128);
 
-  // CALIBRATION
-  // clear the scale
-  // call tare() to set the zero offset
-  // put a known weight on the scale 
-  // call callibrate_scale(weight) 
-  // scale is calculated.
-  void callibrate_scale(uint16_t weight, uint8_t times = 10);
+		// waits for the chip to be ready and returns a reading
+		long read();
 
-  // POWER MANAGEMENT
-  void power_down();
-  void power_up();
+		// returns an average reading; times = how many times to read
+		long read_average(byte times = 10);
 
-  // TIME OF LAST READ
-  uint32_t last_read()               { return _lastRead; };
+		// returns (read_average() - OFFSET), that is the current value without the tare weight; times = how many readings to do
+		double get_value(byte times = 1);
 
-  // PRICING  (idem calories?)
-  float get_price(uint8_t times = 1) { return get_units(times) * _price; };
-  void  set_unit_price(float price)  { _price = price; };
-  float get_unit_price()             { return _price; };
+		// returns get_value() divided by SCALE, that is the raw value divided by a value obtained via calibration
+		// times = how many readings to do
+		float get_units(byte times = 1);
 
-private:
-  uint8_t  _dataPin;
-  uint8_t  _clockPin;
+		// set the OFFSET value for tare weight; times = how many times to read the tare value
+		void tare(byte times = 10);
 
-  uint8_t  _gain = 128;     // default channel A
-  long     _offset = 0;
-  float    _scale = 1;
-  uint32_t _lastRead = 0;
-  float    _price = 0;
+		// set the SCALE value; this value is used to convert the raw data to "human readable" data (measure units)
+		void set_scale(float scale = 1.f);
+
+		// get the current SCALE
+		float get_scale();
+
+		// set OFFSET, the value that's subtracted from the actual reading (tare weight)
+		void set_offset(long offset = 0);
+
+		// get the current OFFSET
+		long get_offset();
+
+		// puts the chip into power down mode
+		void power_down();
+
+		// wakes up the chip after power down mode
+		void power_up();
 };
 
-// -- END OF FILE --
+#endif /* HX711_h */
