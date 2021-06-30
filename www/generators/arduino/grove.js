@@ -550,54 +550,57 @@ Blockly.Arduino.grove_12_Channel_Capacitive_Touch_Keypad = function() {
   var dropdown_RxPIN = this.getFieldValue('RxPIN');
   var dropdown_TxPIN = this.getFieldValue('TxPIN');
   Blockly.Arduino.includes_['include_SoftwareSerial'] = '#include "SoftwareSerial.h"';
-  Blockly.Arduino.definitions_['definition_Capacitive_Touch_Keypad_' + dropdown_RxPIN] = 'SoftwareSerial keyPad_' + dropdown_RxPIN + '(' + dropdown_TxPIN + ',' + dropdown_RxPIN + ');';
+  Blockly.Arduino.definitions_['definition_Capacitive_Touch_Keypad_' + dropdown_RxPIN] = 'SoftwareSerial keyPad_' + dropdown_RxPIN + '(' + dropdown_TxPIN + ', ' + dropdown_RxPIN + ');';
   Blockly.Arduino.setups_['setup_Capacitive_Touch_Keypad_' + dropdown_RxPIN] = 'keyPad_' + dropdown_RxPIN + '.begin(9600);\n';
-  Blockly.Arduino.userFunctions_['getDataKeypad_' + dropdown_RxPIN] = 'char printData(SoftwareSerial keyPad) {\n'
-    +' while(keyPad.available()) {\n'
-    +'     uint8_t data = keyPad.read();\n'
-    +'     switch(data) {\n'
-    +'             case 0xE1 :\n'
-    +'                 return("1");\n'
-    +'                 break;\n'
-    +'             case 0xE2 :\n'
-    +'                 return("2");\n'
-    +'                 break;\n'
-    +'             case 0xE3 :\n'
-    +'                 return("3");\n'
-    +'                 break;\n'
-    +'             case 0xE4 :\n'
-    +'                 return("4");\n'
-    +'                 break;\n'
-    +'             case 0xE5 :\n'
-    +'                 return("5");\n'
-    +'                 break;\n'
-    +'             case 0xE6 :\n'
-    +'                 return("6");\n'
-    +'                 break;\n'
-    +'             case 0xE7 :\n'
-    +'                 return("7");\n'
-    +'                 break;\n'
-    +'             case 0xE8 :\n'
-    +'                 return("8");\n'
-    +'                 break;\n'
-    +'             case 0xE9 :\n'
-    +'                 return("9");\n'
-    +'                 break;\n'
-    +'             case 0xEA :\n'
-    +'                 return("*");\n'
-    +'                 break;\n'
-    +'             case 0xEB :\n'
-    +'                 return("0");\n'
-    +'                 break;\n'
-    +'             case 0xEC :\n'
-    +'                 return("#");\n'
-    +'                 break;\n'
-    +'             default:\n'
-    +'                 break;\n'
-    +'     }\n'
-    +'   }\n'
-    +' }';
-  var code = 'printData(keyPad_' + dropdown_RxPIN + ')';
+  Blockly.Arduino.userFunctions_['getDataKeypad_' + dropdown_RxPIN] = 'String getKeypadTouched(padToScan) {\n'
+    +'  uint8_t data;\n'
+    +'  while(padToScan.available()) {\n'
+    +'     data = padToScan.read() - 224;\n'
+    +'  }\n'
+    +'  if (data > 0 && data < 13) {\n'
+    +'      if (data == 10) {\n'
+    +'        return "*";\n'
+    +'      } else if (data == 11) {\n'
+    +'        return "0";\n'
+    +'      } else if (data == 12) {\n'
+    +'        return "#";\n'
+    +'      } else {\n'
+    +'        return String(data);\n'
+    +'      }\n'
+    +'  } else {\n'
+    +'    return "";\n'
+    +'  }\n'
+    +'}';
+  var code = 'getKeypadTouched(keyPad_' + dropdown_RxPIN + ')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.grove_gas_sensor_SGP30 = function() {
+  var type = this.getFieldValue('TYPE');
+
+  Blockly.Arduino.includes_['include_Wire'] = '#include <Wire.h>'
+  Blockly.Arduino.includes_['include_SGP30'] = '#include <Adafruit_SGP30.h>'
+  Blockly.Arduino.definitions_['define_SGP30'] = 'Adafruit_SGP30 sgp30;';
+  switch(type){
+      case 'CO2':
+        var code = 'sgp30_readCO2()';        
+        Blockly.Arduino.userFunctions_['sgp30_readCO2'] = 'uint16_t sgp30_readCO2() {\n'
+          +'  if (!sgp30.IAQmeasure())\n'
+          +'    return 0;\n'
+          +'  else return sgp30.eCO2;\n'
+          +'}';
+      break;
+      case 'TVOC':
+        var code = 'sgp30_readTVOC()';        
+        Blockly.Arduino.userFunctions_['sgp30_readTVOC'] = 'uint16_t sgp30_readTVOC() {\n'
+          +'  if (!sgp30.IAQmeasure())\n'
+          +'    return 0;\n'
+          +'  else return sgp30.TVOC;\n'
+          +'}';
+      break;
+  }
+
+  Blockly.Arduino.setups_['setup_SGP30'] = 'sgp30.begin();\n'
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
